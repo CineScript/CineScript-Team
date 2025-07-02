@@ -5,27 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Library</title>
-    <script type="module" crossorigin src="/CineScript/assets/main-CXK_G5HC.js"></script>
-    <link rel="stylesheet" crossorigin href="/CineScript/assets/main-huy5pIvN.css">
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <header class="header" id="header">
-  header section
-</header>
+    <load
+      src="./partials/header.html"
+      icon-path="./img/sprite.svg#logo"
+      highlight-curr="active"
+    />
 
     <main>
       <!-- Loads the specified .html file -->
-      <section class="library-hero" id="library-hero">
-    library hero section
-</section>
-      <section class="library" id="library">
-    library section
-</section>
+      <load src="./partials/library-hero.html" />
+      <load src="./partials/library.html" />
     </main>
 
-    <footer class="footer" id="footer">
-  footer section
-</footer>
+    <load src="./partials/footer.html" />
 
+    <script type="module" src="./main.js"></script>
   </body>
 </html>
