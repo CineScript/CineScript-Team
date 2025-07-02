@@ -19,7 +19,7 @@
   line-height: auto;
   letter-spacing: 0;
 
-  /* color Variables */
+  /* Color Variables */
   --orange-color: #f87719;
   --white-color: #fff;
   --black-color: #111;
@@ -45,7 +45,7 @@
     rgba(0, 0, 0, 0) 92%
   );
 
-  /* shadow filters */
+  /* Shadow Filters */
   --primary-shadow: drop-shadow(1, 1, 24, 2, rgba(1, 1, 1, 0.45));
   --secondary-shadow: drop-shadow(1, 1, 14, 4, rgba(255, 107, 8, 0.42));
   --white-theme-shadow: drop-shadow(1, 1, 14, 4, rgba(0, 0, 0, 0.22));
@@ -75,7 +75,7 @@
   box-sizing: border-box;
 }
 
-/* mobile design */
+/* Mobile Design */
 body {
   display: flex;
   flex-direction: column;
@@ -89,9 +89,10 @@ body {
   line-height: auto;
   letter-spacing: 0;
   font-weight: var(--fw-regular);
+  overflow-x: hidden;
 }
 
-/* Fonts Ajustment */
+/* Fonts Style */
 h1 {
   font-size: 40px;
   font-weight: var(--fw-bold);
@@ -127,7 +128,7 @@ h3 {
   letter-spacing: 0;
 }
 
-/* Buttons Ajustment */
+/* Buttons Style */
 .btn-primary {
   width: 117px;
   height: 38px;
@@ -190,7 +191,7 @@ h3 {
     font-size: 14px;
   }
 
-  /* Fonts Ajustment */
+  /* Fonts Style */
   h1 {
     font-size: 52px;
     font-weight: var(--fw-bold);
@@ -245,7 +246,7 @@ h3 {
     font-size: 16px;
   }
 
-  /* Fonts Ajustment */
+  /* Fonts Style */
   h1 {
     font-size: 64px;
     font-weight: var(--fw-bold);
