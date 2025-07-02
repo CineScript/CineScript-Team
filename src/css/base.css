@@ -92,6 +92,17 @@ body {
   overflow-x: hidden;
 }
 
+section {
+  width: 100%;
+  height: auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Fonts Style */
 h1 {
   font-size: 40px;
