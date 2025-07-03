@@ -44,7 +44,3 @@ async function loadPartials() {
   }
 }
 
-loadPartials().then(() => {
-  initCatalog();
-});
-
