@@ -9,7 +9,6 @@
 // import { ... } from './library.js';
 // import { ... } from './footer.js';
 
-import { initCatalog } from './js/catalog.js';
 
 const themeButtons = document.querySelectorAll('[data-theme-option]');
 const htmlEl = document.documentElement;
