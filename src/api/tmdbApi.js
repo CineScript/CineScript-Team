@@ -1,6 +1,12 @@
 const API_KEY = "2609725f661288e9b08bc0d62455b671";
 const BASE_URL = "https://api.themoviedb.org/3";
 
+// Tüm filmler
+export async function fetchPopularMovies(page = 1) {
+  const res = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`);
+  return await res.json();
+}
+
 // Günlük trend filmler
 export async function fetchDailyTrending() {
   const res = await fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`);
@@ -39,8 +45,9 @@ export async function searchMovies(query, year = "") {
   return await res.json();
 }
 
-// Tür listesini getirme
+// Tür listesini getir
 export async function fetchGenres() {
   const res = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
   return await res.json();
 }
+

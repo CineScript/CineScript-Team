@@ -9,3 +9,43 @@
 // import { ... } from './library.js';
 // import { ... } from './footer.js';
 
+import { initCatalog } from './js/catalog.js';
+
+const themeButtons = document.querySelectorAll('[data-theme-option]');
+const htmlEl = document.documentElement;
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  htmlEl.setAttribute('data-theme', savedTheme);
+}
+
+themeButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const selectedTheme = button.getAttribute('data-theme-option');
+    htmlEl.setAttribute('data-theme', selectedTheme);
+    localStorage.setItem('theme', selectedTheme);
+  });
+});
+
+async function loadPartials() {
+  const loads = document.querySelectorAll('load');
+  for (const el of loads) {
+    const src = el.getAttribute('src');
+    if (src) {
+      const res = await fetch(src);
+      if (res.ok) {
+        const html = await res.text();
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+        el.replaceWith(wrapper);
+      } else {
+        console.error('Partial yüklenemedi:', src);
+      }
+    }
+  }
+}
+
+loadPartials().then(() => {
+  initCatalog();
+});
+
