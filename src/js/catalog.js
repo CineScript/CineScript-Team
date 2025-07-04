@@ -76,7 +76,7 @@ export async function initCatalog() {
     ]);
     console.log('API verileri geldi:', { popularData, dailyData, weeklyData, upcomingData });
 
-    // Tek bir listeye birleştirme
+    // Tek bir listeye birleştirmek
     const allMovies = [
       ...popularData.results,
       ...dailyData.results,
