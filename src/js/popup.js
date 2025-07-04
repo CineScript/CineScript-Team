@@ -65,7 +65,7 @@ export async function createMoviePopup(movie) {
   let template = document.querySelector('#popup-template');
   if (!template) {
     // Eğer template yoksa partials/popup.html'i fetch et ve ekle
-    fetch('/partials/popup.html')
+    fetch('../../partials/popup.html')
       .then(res => res.text())
       .then(async html => {
         const tempDiv = document.createElement('div');
