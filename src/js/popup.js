@@ -60,28 +60,45 @@ function updateButtonState(movie, button) {
   }
 }
 
-function getPopupPath() {
-  const isLocal = window.location.hostname === 'localhost';
-  const repo = window.location.pathname.split('/')[1];
-  return isLocal
-    ? '../partials/popup.html'
-    : `/${repo}/src/partials/popup.html`;
-}
-
 export async function createMoviePopup(movie) {
   // popup.html'den şablonu klonla
   let template = document.querySelector('#popup-template');
   if (!template) {
     // Eğer template yoksa partials/popup.html'i fetch et ve ekle
-    fetch(getPopupPath())
-      .then(res => res.text())
+    const isLocal = window.location.hostname === 'localhost';
+    let popupPath;
+
+    if (isLocal) {
+      // Lokal geliştirme için: Public klasöründeki dosyalara '/' ile erişilir
+      popupPath = '/popup.html';
+    } else {
+      // Canlı ortam için: GitHub Pages'da repo adıyla birlikte
+      const repoName = window.location.pathname.split('/')[1];
+      popupPath = `/${repoName}/popup.html`;
+    }
+
+    fetch(popupPath)
+      .then(res => {
+        if (!res.ok) {
+          console.error(`Popup.html yüklenemedi. Durum: ${res.status}, URL: ${res.url}`);
+          throw new Error('Network response was not ok.');
+        }
+        return res.text();
+      })
       .then(async html => {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
         const popupOverlay = tempDiv.querySelector('.movie-popup-overlay');
-        popupOverlay.id = 'popup-template';
-        document.body.appendChild(popupOverlay);
-        await showPopupFromTemplate(popupOverlay, movie);
+        if (popupOverlay) { // Null kontrolü ekledik
+          popupOverlay.id = 'popup-template';
+          document.body.appendChild(popupOverlay);
+          await showPopupFromTemplate(popupOverlay, movie);
+        } else {
+          console.error("movie-popup-overlay bulunamadı, HTML içeriği yanlış olabilir.");
+        }
+      })
+      .catch(error => {
+        console.error("Popup yüklenirken bir hata oluştu:", error);
       });
     return;
   }
@@ -119,7 +136,7 @@ async function showPopupFromTemplate(popupOverlay, movie) {
   popupOverlay.querySelector('.genre-value').textContent = genreText;
   // About
   popupOverlay.querySelector('.about-value').textContent = movie.overview || 'No description.';
-  
+
   // Buton seçimi ve durumu güncelleme & event ekleme
   const addBtn = popupOverlay.querySelector('.movie-popup-add-btn');
   if (addBtn) {
@@ -129,7 +146,7 @@ async function showPopupFromTemplate(popupOverlay, movie) {
       toggleLibrary(movie, this);
     });
   }
-  
+
   // Kapatma butonu
   const closeBtn = popupOverlay.querySelector('.movie-popup-close');
   closeBtn.addEventListener('mouseenter', () => {
@@ -141,7 +158,7 @@ async function showPopupFromTemplate(popupOverlay, movie) {
   closeBtn.addEventListener('click', () => popupOverlay.remove());
 
   // Herhangi bir yere tıklanınca popup'ı kapat
-  popupOverlay.addEventListener('mousedown', function (e) {
+  popupOverlay.addEventListener('mousedown', function(e) {
     if (e.target === popupOverlay) {
       popupOverlay.remove();
     }

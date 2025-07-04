@@ -10,6 +10,9 @@
 // import { ... } from './footer.js';
 
 import { initCatalog } from './js/catalog.js';
+import { createMoviePopup } from './js/popup.js';
+
+
 
 const themeButtons = document.querySelectorAll('[data-theme-option]');
 const htmlEl = document.documentElement;
