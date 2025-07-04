@@ -148,21 +148,33 @@ async function showPopupFromTemplate(popupOverlay, movie) {
   }
 
   // Kapatma butonu
-  const closeBtn = popupOverlay.querySelector('.movie-popup-close');
-  closeBtn.addEventListener('mouseenter', () => {
-    closeBtn.querySelector('img').src = '../img/svg/close-hover.svg';
-  });
-  closeBtn.addEventListener('mouseleave', () => {
-    closeBtn.querySelector('img').src = '../img/svg/close.svg';
-  });
-  closeBtn.addEventListener('click', () => popupOverlay.remove());
+const closeBtn = popupOverlay.querySelector('.movie-popup-close');
 
-  // Herhangi bir yere tıklanınca popup'ı kapat
-  popupOverlay.addEventListener('mousedown', function(e) {
-    if (e.target === popupOverlay) {
-      popupOverlay.remove();
-    }
-  });
+// Repo adını dinamik olarak alalım, böylece hem lokalde hem canlıda çalışır
+const isLocal = window.location.hostname === 'localhost';
+const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
+const basePath = isLocal ? '' : `/${repoName}`; // Canlıda "/CineScript-Team" gibi olacak
+
+closeBtn.addEventListener('mouseenter', () => {
+  // Canlıda: /CineScript-Team/img/svg/close-hover.svg
+  // Lokal: /img/svg/close-hover.svg
+  closeBtn.querySelector('img').src = `${basePath}/img/svg/close-hover.svg`;
+});
+
+closeBtn.addEventListener('mouseleave', () => {
+  // Canlıda: /CineScript-Team/img/svg/close.svg
+  // Lokal: /img/svg/close.svg
+  closeBtn.querySelector('img').src = `${basePath}/img/svg/close.svg`;
+});
+
+closeBtn.addEventListener('click', () => popupOverlay.remove());
+
+// Herhangi bir yere tıklanınca popup'ı kapat
+popupOverlay.addEventListener('mousedown', function(e) {
+  if (e.target === popupOverlay) {
+    popupOverlay.remove();
+  }
+});
   // Ekrana ekle
   document.body.appendChild(popupOverlay);
 }
