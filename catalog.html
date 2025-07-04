@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catalog</title>
-    <script type="module" crossorigin src="/CineScript-Team/assets/main-BHu4TSlE.js"></script>
-    <link rel="stylesheet" crossorigin href="/CineScript-Team/assets/main-CqSddvdW.css">
+    <script type="module" crossorigin src="/CineScript-Team/assets/catalog-B3nF13DQ.js"></script>
+    <link rel="stylesheet" crossorigin href="/CineScript-Team/assets/catalog-B5jSgjNV.css">
   </head>
   <body>
     <header class="header" id="header">
@@ -19,8 +19,39 @@
   catalog hero section
 </section>
       <section class="catalog" id="catalog">
-  catalog section
+
+  <section class="search-section">
+    <form id="search-form" class="search-form">
+      <input
+        type="text"
+        placeholder="Search"
+        name="query"
+        id="search-input"
+        class="search-input"
+      />
+      <select id="year-select" class="year-select">
+      <option value="">Year</option>
+      </select>
+      
+      <button type="submit" class="search-btn">Ara</button>
+    </form>
+  </section>
+
+  <!-- Film Listesi -->
+  <section class="movie-list-section">
+    <ul id="movie-list" class="movie-list">
+      <!-- JS ile film kartları gelecek -->
+    </ul>
+    <p id="no-results" class="no-results-message" style="display: none;">
+      Aradığınız kriterlere uygun film bulunamadı.
+    </p>
+  </section>
+
+  <!-- Sayfalama (şimdilik boş) -->
+  <section class="pagination-section" id="pagination"></section>
 </section>
+
+
     </main>
 
     <footer class="footer" id="footer">
