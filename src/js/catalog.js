@@ -57,7 +57,7 @@ function populateYearSelect() {
   }
 }
 
-async function initCatalog() {
+export async function initCatalog() {
   console.log('initCatalog fonksiyonu çağrıldı!');
   if (!form || !movieList || !noResults || !yearSelect) {
     console.error('Catalog için gerekli DOM elemanları bulunamadı!');
