@@ -57,7 +57,7 @@ function populateYearSelect() {
   }
 }
 
-async function initCatalog() {
+export async function initCatalog() {
   console.log('initCatalog fonksiyonu çağrıldı!');
   if (!form || !movieList || !noResults || !yearSelect) {
     console.error('Catalog için gerekli DOM elemanları bulunamadı!');
@@ -76,7 +76,7 @@ async function initCatalog() {
     ]);
     console.log('API verileri geldi:', { popularData, dailyData, weeklyData, upcomingData });
 
-    // Tek bir listeye birleştirme
+    // Tek bir listeye birleştirmek
     const allMovies = [
       ...popularData.results,
       ...dailyData.results,
