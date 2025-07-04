@@ -60,12 +60,20 @@ function updateButtonState(movie, button) {
   }
 }
 
+function getPopupPath() {
+  const isLocal = window.location.hostname === 'localhost';
+  const repo = window.location.pathname.split('/')[1];
+  return isLocal
+    ? '../partials/popup.html'
+    : `/${repo}/src/partials/popup.html`;
+}
+
 export async function createMoviePopup(movie) {
   // popup.html'den şablonu klonla
   let template = document.querySelector('#popup-template');
   if (!template) {
     // Eğer template yoksa partials/popup.html'i fetch et ve ekle
-    fetch('/CineScript-Team/src/partials/popup.html')
+    fetch(getPopupPath())
       .then(res => res.text())
       .then(async html => {
         const tempDiv = document.createElement('div');
@@ -77,11 +85,13 @@ export async function createMoviePopup(movie) {
       });
     return;
   }
+
   // Template zaten varsa klonla ve göster
   const popupOverlay = template.cloneNode(true);
   popupOverlay.id = '';
   await showPopupFromTemplate(popupOverlay, movie);
 }
+
 
 async function showPopupFromTemplate(popupOverlay, movie) {
   popupOverlay.style.display = 'flex';
