@@ -10,7 +10,7 @@ export async function fetchDailyTrending() {
   return await res.json();
 }
 
-// Aylık trend filmler
+// Haftalık trend filmler
 export async function fetchUpcomingMovies(page = 1) {
   const now = new Date();
   const year = now.getFullYear();
