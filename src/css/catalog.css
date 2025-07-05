@@ -107,6 +107,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
 }
 
 
@@ -120,6 +123,7 @@
   padding-left: 10px;
   font-size: 16px;
   cursor: pointer;
+  display: none;
   -webkit-appearance: none; /* Safari ve Chrome */
   -moz-appearance: none;    /* Firefox */
   appearance: none;         /* Genel */

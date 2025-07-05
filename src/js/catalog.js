@@ -3,10 +3,8 @@ import {
   fetchDailyTrending,
   fetchWeeklyTrending,
   fetchUpcomingMovies,
-  searchMovies,
+  searchMovies
 } from '../api/tmdbApi.js';
-import './catalog-hero.js';
-import '../css/modal-trailer.css';
 import { createMoviePopup } from './popup.js';
 
 console.log('catalog.js yüklendi!');
@@ -29,7 +27,6 @@ function enableMoviePopups() {
   });
 }
 
-// renderMovies fonksiyonunu güncelleyip movie objesini li'ye atama
 function renderMovies(movies) {
   movieList.innerHTML = '';
   if (!movies || movies.length === 0) {
@@ -42,9 +39,7 @@ function renderMovies(movies) {
     const li = document.createElement('li');
     li.classList.add('movie-item');
     li.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/original${movie.poster_path}" alt="${
-      movie.title
-    }" />
+      <img src="https://image.tmdb.org/t/p/original${movie.poster_path}" alt="${movie.title}" />
       <h3>${movie.title}</h3>
       <p>Yayın Tarihi: ${movie.release_date || 'Bilinmiyor'}</p>
     `;
@@ -73,36 +68,24 @@ export async function initCatalog() {
   populateYearSelect();
 
   try {
-    // Tüm kategorilerden filmleri çekme
-    const [popularData, dailyData, weeklyData, upcomingData] =
-      await Promise.all([
-        fetchPopularMovies(),
-        fetchDailyTrending(),
-        fetchWeeklyTrending(),
-        fetchUpcomingMovies(),
-      ]);
-    console.log('API verileri geldi:', {
-      popularData,
-      dailyData,
-      weeklyData,
-      upcomingData,
-    });
+    const [popularData, dailyData, weeklyData, upcomingData] = await Promise.all([
+      fetchPopularMovies(),
+      fetchDailyTrending(),
+      fetchWeeklyTrending(),
+      fetchUpcomingMovies()
+    ]);
 
-    // Tek bir listeye birleştirmek
     const allMovies = [
       ...popularData.results,
       ...dailyData.results,
       ...weeklyData.results,
-      ...upcomingData.results,
+      ...upcomingData.results
     ];
-    console.log('Birleştirilmiş film listesi:', allMovies);
 
-    // ID bazlı benzersizleştirme
     const uniqueMovies = new Map();
     allMovies.forEach(m => {
       if (!uniqueMovies.has(m.id)) uniqueMovies.set(m.id, m);
     });
-    console.log('Benzersiz filmler:', Array.from(uniqueMovies.values()));
 
     renderMovies(Array.from(uniqueMovies.values()));
 
@@ -110,18 +93,15 @@ export async function initCatalog() {
     form.addEventListener('submit', async e => {
       e.preventDefault();
 
-      let query = document.getElementById('search-input').value.trim();
-      let year = yearSelect.value;
+      const query = document.getElementById('search-input').value.trim();
+      const year = yearSelect.value;
 
       if (!query) return;
 
-      // API'ye arama sorgusu gönderme
       try {
         const data = await searchMovies(query);
-        console.log('Arama sonuçları:', data);
-
-        // Eğer yıl seçilmişse, filtreleme yapma
         let filteredResults = data.results;
+
         if (year) {
           filteredResults = filteredResults.filter(
             m => m.release_date && m.release_date.startsWith(year)
@@ -132,15 +112,26 @@ export async function initCatalog() {
 
         if (filteredResults.length === 0) {
           noResults.style.display = 'block';
-          noResults.textContent =
-            'Aradığınız kriterlere uygun film bulunamadı.';
+          noResults.textContent = 'Aradığınız kriterlere uygun film bulunamadı.';
+        } else {
+          noResults.style.display = 'none';
+
+          // Yıl seçiciyi görünür yap
+          yearSelect.style.display = 'inline-block';
+
+          // Yıl seçiciyi arama kutusu ile buton arasına taşı
+          const searchBtn = form.querySelector('.search-button');
+          if (searchBtn && yearSelect) {
+            form.insertBefore(yearSelect, searchBtn);
+          }
         }
       } catch (error) {
-        console.error('Film arama hatası:', error);
+        console.error('Arama sırasında hata oluştu:', error);
         noResults.style.display = 'block';
         noResults.textContent = 'Film bulunamadı veya bir hata oluştu.';
       }
     });
+
   } catch (error) {
     console.error('Filmler yüklenirken hata:', error);
     noResults.style.display = 'block';
@@ -148,6 +139,6 @@ export async function initCatalog() {
   }
 }
 
-// Eğer script doğrudan çağrılıyorsa otomatik başlat
+// Otomatik başlat
 initCatalog();
 enableMoviePopups();
