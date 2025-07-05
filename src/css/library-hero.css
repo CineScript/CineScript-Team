@@ -1,5 +1,5 @@
 .library-hero-bg {
-  /* background-image: url('../img/Hero-Library-Mobile.jpg'); */
+  background-image: url('../img/Hero-Library-Mobile.jpg');
   background-size: 90% auto;
   background-repeat: no-repeat;
   background-position: 120%;
@@ -18,7 +18,7 @@
 
 @media (min-resolution: 2dppx) {
   .library-hero-bg {
-    /* background-image: url('../img/Hero-Library-Mobile@2x.jpg'); */
+    background-image: url('../img/Hero-Library-Mobile@2x.jpg');
   }
 }
 
@@ -33,7 +33,7 @@
 
 @media only screen and (min-width: 768px) {
   .library-hero-bg {
-    /* background-image: url('../img/Hero-Library-Tablet.jpg'); */
+    background-image: url('../img/Hero-Library-Tablet.jpg');
     background-size: contain;
     background-position: 270% 110%;
 
@@ -47,7 +47,7 @@
 
   @media (min-resolution: 2dppx) {
     .library-hero-bg {
-      /* background-image: url('../img/Hero-Library-Tablet@2x.jpg'); */
+      background-image: url('../img/Hero-Library-Tablet@2x.jpg');
     }
   }
 }
@@ -56,7 +56,7 @@
   .library-hero-bg {
     width: 1280px;
     height: 720px;
-    /* background-image: url('../img/Hero-Library-Desktop.jpg'); */
+    background-image: url('../img/Hero-Library-Desktop.jpg');
     background-size: 99% auto;
 
     background-position: 2000%;
@@ -64,7 +64,7 @@
 
   @media (min-resolution: 2dppx) {
     .library-hero-bg {
-      /* background-image: url('../img/Hero-Library-Desktop@2x.jpg'); */
+      background-image: url('../img/Hero-Library-Desktop@2x.jpg');
     }
   }
 

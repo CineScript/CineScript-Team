@@ -25,5 +25,3 @@ export async function setHeroBackground() {
     // CSS fallback devrede kalır
   }
 }
-
-setHeroBackground();
