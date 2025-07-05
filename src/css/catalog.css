@@ -98,10 +98,17 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-.search-btn {
-  width: 48px;
-  height: 48px;
+.search-button {
+  background: linear-gradient(45deg, rgba(255,194,38,1) 0%, rgba(248,65,25,1) 100%);
+  border-radius: 50%;
+  padding: 14px; 
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
 .year-select {
   width: 95px;
