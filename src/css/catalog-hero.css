@@ -1,0 +1,95 @@
+.catalog-hero {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  color: #fff;
+}
+
+.catalog-hero-overlay {
+  background: rgba(0, 0, 0, 0.5); /* Görselin üstüne koyu filtre */
+  width: 100%;
+  height: 100%;
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+}
+
+.catalog-hero-container {
+  padding: 0 16px;
+}
+
+.catalog-hero-text {
+  max-width: 600px;
+}
+
+.catalog-hero-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.catalog-hero-rating {
+  margin-bottom: 12px;
+}
+
+.catalog-hero-overview {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  max-height: 7em;
+  overflow: hidden;
+}
+
+.catalog-hero-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.catalog-hero-btn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.catalog-hero-btn.trailer {
+  background: linear-gradient(90deg, #f87501, #ff3c00);
+  color: #fff;
+}
+
+.catalog-hero-btn.details {
+  background: #fff;
+  color: #000;
+}
+
+@media (min-width: 768px) {
+  .catalog-hero-title {
+    font-size: 32px;
+  }
+
+  .catalog-hero-overview {
+    font-size: 16px;
+  }
+
+  .catalog-hero-btn {
+    font-size: 16px;
+  }
+
+  .catalog-hero {
+    min-height: 600px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .catalog-hero-title {
+    font-size: 48px;
+  }
+
+  .catalog-hero {
+    min-height: 720px;
+  }
+}
