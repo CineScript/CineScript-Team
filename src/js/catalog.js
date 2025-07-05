@@ -94,38 +94,49 @@ export async function initCatalog() {
 
     renderMovies(Array.from(uniqueMovies.values()));
 
-    // Arama formu submit
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
+form.addEventListener('submit', async e => {
+  e.preventDefault();
 
-      let query = document.getElementById('search-input').value.trim();
-      let year = yearSelect.value;
+  let query = document.getElementById('search-input').value.trim();
+  let year = yearSelect.value;
 
-      if (!query) return;
+  if (!query) return;
 
-      // API'ye arama sorgusu gönderme
-      try {
-        const data = await searchMovies(query);
-        console.log('Arama sonuçları:', data);
+  try {
+    const data = await searchMovies(query);
+    console.log('Arama sonuçları:', data);
 
-        // Eğer yıl seçilmişse, filtreleme yapma
-        let filteredResults = data.results;
-        if (year) {
-          filteredResults = filteredResults.filter(m => m.release_date && m.release_date.startsWith(year));
-        }
+    let filteredResults = data.results;
 
-        renderMovies(filteredResults);
+    if (year) {
+      filteredResults = filteredResults.filter(m => m.release_date && m.release_date.startsWith(year));
+    }
 
-        if (filteredResults.length === 0) {
-          noResults.style.display = 'block';
-          noResults.textContent = 'Aradığınız kriterlere uygun film bulunamadı.';
-        }
-      } catch (error) {
-        console.error('Film arama hatası:', error);
-        noResults.style.display = 'block';
-        noResults.textContent = 'Film bulunamadı veya bir hata oluştu.';
+    renderMovies(filteredResults);
+
+    if (filteredResults.length === 0) {
+      noResults.style.display = 'block';
+      noResults.textContent = 'Aradığınız kriterlere uygun film bulunamadı.';
+    } else {
+      noResults.style.display = 'none';
+
+      // Yıl seçiciyi görünür yap
+      yearSelect.style.display = 'inline-block';
+
+      // Yıl seçiciyi arama kutusu ile buton arasına taşı
+      const searchBtn = form.querySelector('.search-button');
+      if (searchBtn && yearSelect) {
+        form.insertBefore(yearSelect, searchBtn);
       }
-    });
+    }
+
+  } catch (error) {
+    console.error('Arama sırasında hata oluştu:', error);
+    noResults.style.display = 'block';
+    noResults.textContent = 'Film bulunamadı veya bir hata oluştu.';
+  }
+});
+
 
   } catch (error) {
     console.error('Filmler yüklenirken hata:', error);
