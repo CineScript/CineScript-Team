@@ -11,6 +11,7 @@
 
 import { initCatalog } from './js/catalog.js';
 import { createMoviePopup } from './js/popup.js';
+
 import { showLoader, hideLoader } from './js/loader.js';
 import { initScrollUpButton } from './js/scroll-up.js';
 
@@ -52,4 +53,3 @@ async function loadPartials() {
 loadPartials().then(() => {
   initCatalog();
 });
-
