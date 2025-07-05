@@ -41,6 +41,11 @@
   gap: 20px;
   padding: 20px;
 }
+#genre-select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+}
 
 /* Film kartı */
 .film-card {
