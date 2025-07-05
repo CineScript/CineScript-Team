@@ -1,4 +1,5 @@
 import { fetchDailyTrending, fetchMovieVideos } from '../api/tmdbApi.js';
+import { openTrailerModal } from './modal-trailer.js';
 
 const titleEl = document.querySelector('.catalog-hero-title');
 const overviewEl = document.querySelector('.catalog-hero-overview');
@@ -34,12 +35,13 @@ async function handleTrailerClick() {
   try {
     const data = await fetchMovieVideos(currentMovieId);
     const videos = data.results;
+
     const trailer = videos.find(
       v => v.type === 'Trailer' && v.site === 'YouTube'
     );
 
     if (trailer) {
-      window.open(`https://www.youtube.com/watch?v=${trailer.key}`, '_blank');
+      openTrailerModal(trailer.key);
     } else {
       alert('No trailer available.');
     }
@@ -50,7 +52,7 @@ async function handleTrailerClick() {
 
 trailerBtn.addEventListener('click', handleTrailerClick);
 detailsBtn.addEventListener('click', () => {
-  alert('More details tıklanıldı!'); // Buraya modal ya da detay sayfası ekleyebilirsin
+  alert('More details tıklanıldı!');
 });
 
 renderRandomHeroMovie();

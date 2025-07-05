@@ -6,6 +6,7 @@ import {
   searchMovies,
 } from '../api/tmdbApi.js';
 import './catalog-hero.js';
+import '../css/modal-trailer.css';
 import { createMoviePopup } from './popup.js';
 
 console.log('catalog.js yüklendi!');
