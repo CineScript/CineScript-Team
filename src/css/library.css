@@ -1,0 +1,102 @@
+.library {
+  padding: 40px 20px;
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+}
+
+.library-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.library-text {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.4em;
+  margin-bottom: 4px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.library-btn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.library-btn.search {
+  background: var(--primary-linear-color);
+  color: var(--black-color);
+}
+
+.film-list {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Film kartı */
+.film-card {
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+.film-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.film-title {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.film-info {
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Tablet ve üzeri */
+@media (min-width: 768px) {
+  .film-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .library-text {
+    font-size: 24px;
+    line-height: 1.6em;
+  }
+  .library-btn {
+    font-size: 14px;
+    width: 133px;
+    height: 40px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .film-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .library-text {
+    font-size: 32px;
+    line-height: 1.6em;
+  }
+
+  .library-btn {
+    font-size: 16px;
+    width: 158px;
+    height: 52px;
+  }
+}
