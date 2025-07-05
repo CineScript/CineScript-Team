@@ -2,9 +2,9 @@ import { fetchDailyTrending, fetchMovieVideos } from '../api/tmdbApi.js';
 
 const titleEl = document.querySelector('.catalog-hero-title');
 const overviewEl = document.querySelector('.catalog-hero-overview');
-const imageEl = document.querySelector('.catalog-hero-img');
-const trailerBtn = document.querySelector('.catalog-hero-trailer-btn');
-
+const trailerBtn = document.querySelector('.catalog-hero-btn.trailer');
+const detailsBtn = document.querySelector('.catalog-hero-btn.details');
+const heroSection = document.querySelector('.catalog-hero');
 let currentMovieId = null;
 
 async function renderRandomHeroMovie() {
@@ -12,23 +12,19 @@ async function renderRandomHeroMovie() {
     const data = await fetchDailyTrending();
     const movies = data.results;
 
-    if (!movies || movies.length === 0) return;
-
     const randomMovie = movies[Math.floor(Math.random() * movies.length)];
 
     currentMovieId = randomMovie.id;
-    const title = randomMovie.title || randomMovie.name || 'Untitled';
-    const overview = randomMovie.overview || 'No description available';
-    const posterPath = randomMovie.poster_path
-      ? `https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`
-      : 'img/placeholder.jpg';
 
-    titleEl.textContent = title;
-    overviewEl.textContent = overview;
-    imageEl.src = posterPath;
-    imageEl.alt = title;
+    const posterPath = randomMovie.backdrop_path || randomMovie.poster_path;
+    const bgUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
+
+    heroSection.style.backgroundImage = `url(${bgUrl})`;
+
+    titleEl.textContent = randomMovie.title || randomMovie.name || 'Untitled';
+    overviewEl.textContent = randomMovie.overview || 'No description available';
   } catch (error) {
-    console.error('Error loading hero movie:', error);
+    console.error('Error loading hero section:', error);
   }
 }
 
@@ -43,15 +39,18 @@ async function handleTrailerClick() {
     );
 
     if (trailer) {
-      const trailerUrl = `https://www.youtube.com/watch?v=${trailer.key}`;
-      window.open(trailerUrl, '_blank');
+      window.open(`https://www.youtube.com/watch?v=${trailer.key}`, '_blank');
     } else {
-      alert('No trailer available for this movie.');
+      alert('No trailer available.');
     }
   } catch (error) {
-    console.error('Error fetching trailer:', error);
+    console.error('Trailer error:', error);
   }
 }
 
 trailerBtn.addEventListener('click', handleTrailerClick);
+detailsBtn.addEventListener('click', () => {
+  alert('More details tıklanıldı!'); // Buraya modal ya da detay sayfası ekleyebilirsin
+});
+
 renderRandomHeroMovie();
