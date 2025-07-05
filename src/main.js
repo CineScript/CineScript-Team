@@ -4,8 +4,20 @@
 // import { ... } from './catalog-hero.js';
 // import { ... } from './library-hero.js';
 // import { ... } from './trends.js';
-// import { ... } from './upcoming.js';
 // import { ... } from './catalog.js';
 // import { ... } from './library.js';
-// import { ... } from './footer.js';
 
+import 'izitoast/dist/css/iziToast.min.css';
+
+document.addEventListener('DOMContentLoaded', renderUpcoming);
+
+import { renderUpcoming } from './js/upcoming.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const upcomingSection = document.getElementById('upcoming');
+  if (upcomingSection) {
+    renderUpcoming();
+  }
+});
+
+import './js/footer.js';
