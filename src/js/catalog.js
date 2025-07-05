@@ -3,8 +3,10 @@ import {
   fetchDailyTrending,
   fetchWeeklyTrending,
   fetchUpcomingMovies,
-  searchMovies
+  searchMovies,
 } from '../api/tmdbApi.js';
+import './catalog-hero.js';
+import '../css/modal-trailer.css';
 import { createMoviePopup } from './popup.js';
 
 console.log('catalog.js yüklendi!');
@@ -39,7 +41,9 @@ function renderMovies(movies) {
     const li = document.createElement('li');
     li.classList.add('movie-item');
     li.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/original${movie.poster_path}" alt="${movie.title}" />
+      <img src="https://image.tmdb.org/t/p/original${movie.poster_path}" alt="${
+      movie.title
+    }" />
       <h3>${movie.title}</h3>
       <p>Yayın Tarihi: ${movie.release_date || 'Bilinmiyor'}</p>
     `;
@@ -68,18 +72,19 @@ export async function initCatalog() {
   populateYearSelect();
 
   try {
-    const [popularData, dailyData, weeklyData, upcomingData] = await Promise.all([
-      fetchPopularMovies(),
-      fetchDailyTrending(),
-      fetchWeeklyTrending(),
-      fetchUpcomingMovies()
-    ]);
+    const [popularData, dailyData, weeklyData, upcomingData] =
+      await Promise.all([
+        fetchPopularMovies(),
+        fetchDailyTrending(),
+        fetchWeeklyTrending(),
+        fetchUpcomingMovies(),
+      ]);
 
     const allMovies = [
       ...popularData.results,
       ...dailyData.results,
       ...weeklyData.results,
-      ...upcomingData.results
+      ...upcomingData.results,
     ];
 
     const uniqueMovies = new Map();
@@ -112,7 +117,8 @@ export async function initCatalog() {
 
         if (filteredResults.length === 0) {
           noResults.style.display = 'block';
-          noResults.textContent = 'Aradığınız kriterlere uygun film bulunamadı.';
+          noResults.textContent =
+            'Aradığınız kriterlere uygun film bulunamadı.';
         } else {
           noResults.style.display = 'none';
 
@@ -131,7 +137,6 @@ export async function initCatalog() {
         noResults.textContent = 'Film bulunamadı veya bir hata oluştu.';
       }
     });
-
   } catch (error) {
     console.error('Filmler yüklenirken hata:', error);
     noResults.style.display = 'block';
