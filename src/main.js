@@ -12,6 +12,10 @@
 import { initCatalog } from './js/catalog.js';
 import { createMoviePopup } from './js/popup.js';
 
+import { showLoader, hideLoader } from './js/loader.js';
+import { initScrollUpButton } from './js/scroll-up.js';
+
+
 const themeButtons = document.querySelectorAll('[data-theme-option]');
 const htmlEl = document.documentElement;
 
