@@ -71,4 +71,8 @@
   .library-hero-content {
     margin: 169px 699px 249px 117px;
   }
+
+  .library-hero-subtitle {
+    font-size: 16px;
+  }
 }
