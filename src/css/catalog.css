@@ -210,9 +210,8 @@
   cursor: pointer;
   box-sizing: border-box;
   overflow: hidden;
-  border: 1px solid red;
-  
   margin-top: 24px;
+  border: 1px solid #ff6b08;
 }
 
 /* remove stilleri */
