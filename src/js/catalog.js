@@ -5,6 +5,7 @@ import {
   fetchUpcomingMovies,
   searchMovies,
 } from '../api/tmdbApi.js';
+import './catalog-hero.js';
 import { createMoviePopup } from './popup.js';
 
 console.log('catalog.js yüklendi!');

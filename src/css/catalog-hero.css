@@ -1,15 +1,12 @@
 .catalog-hero {
   background-color: #f8f8f8;
   padding: 60px 0;
-  position: relative;
-  overflow: hidden;
 }
 
 .catalog-hero-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 40px;
+  justify-content: center;
 }
 
 .catalog-hero-content {
@@ -18,6 +15,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+  gap: 40px;
 }
 
 .catalog-hero-text {
@@ -28,14 +26,9 @@
 
 .catalog-hero-title {
   font-size: 48px;
-  font-weight: 700;
+  font-weight: bold;
   margin-bottom: 16px;
   color: #111;
-}
-
-.catalog-hero-rating {
-  margin-bottom: 12px;
-  /* yıldızlar buraya gelecek */
 }
 
 .catalog-hero-overview {
@@ -46,7 +39,7 @@
 }
 
 .catalog-hero-trailer-btn {
-  background: linear-gradient(90deg, #f87501 0%, #ff3c00 100%);
+  background: linear-gradient(90deg, #f87501, #ff3c00);
   border: none;
   border-radius: 30px;
   padding: 12px 24px;
@@ -66,38 +59,29 @@
   justify-content: flex-end;
   min-width: 280px;
   max-width: 600px;
-  position: relative;
 }
 
 .catalog-hero-img {
   width: 100%;
-  height: auto;
+  max-height: 500px;
+  object-fit: cover;
   border-top-left-radius: 500px;
   border-bottom-left-radius: 500px;
-  object-fit: cover;
-  max-height: 500px;
-  background-color: #eee;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .catalog-hero-container {
+  .catalog-hero-content {
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+  }
+
+  .catalog-hero-img {
+    border-radius: 20px;
   }
 
   .catalog-hero-title {
     font-size: 36px;
-  }
-
-  .catalog-hero-img {
-    border-radius: 30px;
-  }
-
-  .catalog-hero-text,
-  .catalog-hero-image-wrapper {
-    max-width: 100%;
-    justify-content: center;
   }
 }
