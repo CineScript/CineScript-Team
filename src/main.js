@@ -2,12 +2,12 @@
 // import { ... } from './header.js';
 // import { ... } from './hero.js';
 // import { ... } from './catalog-hero.js';
-// import { ... } from './library-hero.js';
+import './js/library-hero.js';
 // import { ... } from './trends.js';
 // import { ... } from './upcoming.js';
 // import { ... } from './catalog.js';
 // import { ... } from './library.js';
-// import { ... } from './footer.js';
+import './js/footer.js';
 
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -21,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderUpcoming();
   }
 });
-
-import './js/footer.js';
 
 import { initCatalog } from './js/catalog.js';
 import { createMoviePopup } from './js/popup.js';
