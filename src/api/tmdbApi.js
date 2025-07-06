@@ -47,7 +47,9 @@ export async function searchMovies(query, year = "") {
 
 // Tür listesini getir
 export async function fetchGenres() {
-  const res = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
-  return await res.json();
+    const res = await axios.get(`${BASE_URL}/genre/movie/list`, {
+    params: { api_key: API_KEY, language: LANGUAGE },
+  });
+  return res.data;
 }
 
