@@ -4,7 +4,7 @@
 // import { ... } from './catalog-hero.js';
 import './js/library-hero.js';
 // import { ... } from './trends.js';
-// import { ... } from './upcoming.js';
+import './js/upcoming.js';
 // import { ... } from './catalog.js';
 // import { ... } from './library.js';
 import './js/footer.js';
