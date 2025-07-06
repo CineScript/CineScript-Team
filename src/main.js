@@ -1,13 +1,16 @@
-// burada ... kısmına yazılan js dosyalarındaki aktarılacak tanım isimleri gelecek. isimler virgül ile ayrılmalıdır.
-// import { ... } from './header.js';
-// import { ... } from './hero.js';
-// import { ... } from './catalog-hero.js';
+import './js/header.js';
+import './js/hero.js';
+import './js/catalog-hero.js';
 import './js/library-hero.js';
-// import { ... } from './trends.js';
+import './js/trends.js';
 import './js/upcoming.js';
-// import { ... } from './catalog.js';
+import './js/catalog.js';
 import './js/library.js';
 import './js/footer.js';
+import './js/popup.js';
+import './js/loader.js';
+import './js/scroll-up.js';
+
 import { renderUpcoming } from './js/upcoming.js';
 
 import 'izitoast/dist/css/iziToast.min.css';
@@ -44,6 +47,4 @@ async function loadPartials() {
     }
   }
 }
-loadPartials().then(() => {
-  initCatalog();
-});
+loadPartials().then(() => {});
