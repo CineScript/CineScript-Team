@@ -11,6 +11,8 @@ import './js/footer.js';
 
 import 'izitoast/dist/css/iziToast.min.css';
 
+import { renderUpcoming } from './js/upcoming.js';
+
 document.addEventListener('DOMContentLoaded', renderUpcoming);
 
 document.addEventListener('DOMContentLoaded', () => {
