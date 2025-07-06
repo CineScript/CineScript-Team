@@ -30,14 +30,14 @@
   --secondary-black-color: #282828;
   --grey-white-theme-color: #595959;
   --primary-linear-color: linear-gradient(
-    to bottom right,
-    rgba(248, 65, 25, 1) 100%,
-    rgba(248, 159, 25, 0.68) 0%
+    to right bottom,
+    rgba(253, 187, 45, 1) 0%,
+    rgba(224, 45, 0, 1) 100%
   );
   --secondary-linear-color: linear-gradient(
     to top left,
-    rgba(248, 65, 25, 1) 0%,
-    rgba(248, 159, 25, 0.68) 100%
+    rgba(224, 45, 0, 1) 0%,
+    rgba(253, 187, 45, 1) 100%
   );
   --grey-linear-color: linear-gradient(
     to bottom right,
@@ -51,7 +51,7 @@
   --white-theme-shadow: drop-shadow(1, 1, 14, 4, rgba(0, 0, 0, 0.22));
 
   color: var(--white-color);
-  background-color: var(--black-color);
+  background-color: var(--background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -90,11 +90,23 @@ body {
   letter-spacing: 0;
   font-weight: var(--fw-regular);
   overflow-x: hidden;
+  background-color: var(--background-color);
+}
+
+section {
+  width: 100%;
+  height: auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Fonts Style */
 h1 {
-  font-size: 40px;
+  font-size: 36px;
   font-weight: var(--fw-bold);
   line-height: auto;
   letter-spacing: 0;
@@ -191,9 +203,14 @@ h3 {
     font-size: 14px;
   }
 
+  section {
+    padding: 0 32px;
+    gap: 44px;
+  }
+
   /* Fonts Style */
   h1 {
-    font-size: 52px;
+    font-size: 44px;
     font-weight: var(--fw-bold);
     line-height: auto;
     letter-spacing: 0;
@@ -244,6 +261,10 @@ h3 {
     width: 1280px;
     height: 2213px;
     font-size: 16px;
+  }
+
+  section {
+    gap: 60px;
   }
 
   /* Fonts Style */

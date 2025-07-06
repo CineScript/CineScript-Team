@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/CineScript/",
+    "build": "vite build --base=/CineScript-Team/",
     "preview": "vite preview"
   },
   "devDependencies": {
