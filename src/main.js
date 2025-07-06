@@ -2,10 +2,11 @@
 // import { ... } from './header.js';
 // import { ... } from './hero.js';
 // import { ... } from './catalog-hero.js';
-// import { ... } from './library-hero.js';
+import './library-hero.js';
 // import { ... } from './trends.js';
 // import { ... } from './catalog.js';
-// import { ... } from './library.js';
+import './library.js';
+import './js/footer.js';
 
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -20,4 +21,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-import './js/footer.js';
+import { initCatalog } from './js/catalog.js';
+import { createMoviePopup } from './js/popup.js';
+
+import { showLoader, hideLoader } from './js/loader.js';
+import './js/scroll-up.js';
+import './js/library-hero.js';
+import './js/library.js';
+
+async function loadPartials() {
+  const loads = document.querySelectorAll('load');
+  for (const el of loads) {
+    const src = el.getAttribute('src');
+    if (src) {
+      const res = await fetch(src);
+      if (res.ok) {
+        const html = await res.text();
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+        el.replaceWith(wrapper);
+      } else {
+        console.error('Partial yüklenemedi:', src);
+      }
+    }
+  }
+}
+loadPartials().then(() => {
+  initCatalog();
+});
