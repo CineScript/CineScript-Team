@@ -1,3 +1,5 @@
+/*Mobil Cihaz Stilleri*/
+
 .library-hero-bg {
   background-image: url('../img/Hero-Library-Mobile.jpg');
   background-size: 90% auto;
@@ -31,6 +33,8 @@
   font-size: 14px;
 }
 
+/*Tablet Cihaz Stilleri*/
+
 @media only screen and (min-width: 768px) {
   .library-hero-bg {
     background-image: url('../img/Hero-Library-Tablet.jpg');
@@ -51,6 +55,8 @@
     }
   }
 }
+
+/*Desktop Cihaz Stilleri*/
 
 @media only screen and (min-width: 1280px) {
   .library-hero-bg {
