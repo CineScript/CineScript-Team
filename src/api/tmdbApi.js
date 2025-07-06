@@ -1,9 +1,13 @@
-const API_KEY = "2609725f661288e9b08bc0d62455b671";
-const BASE_URL = "https://api.themoviedb.org/3";
+import axios from 'axios';
+
+const API_KEY = '2609725f661288e9b08bc0d62455b671';
+const BASE_URL = 'https://api.themoviedb.org/3';
 
 // Tüm filmler
 export async function fetchPopularMovies(page = 1) {
-  const res = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`);
+  const res = await fetch(
+    `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`
+  );
   return await res.json();
 }
 
@@ -33,14 +37,18 @@ export async function fetchMovieDetails(movieId) {
 
 // Filmin videoları (fragman dahil)
 export async function fetchMovieVideos(movieId) {
-  const res = await fetch(`${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`);
+  const res = await fetch(
+    `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`
+  );
   return await res.json();
 }
 
 // Anahtar kelime + yıla göre arama
-export async function searchMovies(query, year = "") {
+export async function searchMovies(query, year = '') {
   const res = await fetch(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&year=${year}`
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+      query
+    )}&year=${year}`
   );
   return await res.json();
 }
@@ -50,4 +58,3 @@ export async function fetchGenres() {
   const res = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
   return await res.json();
 }
-

@@ -89,7 +89,7 @@ export async function createMoviePopup(movie) {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
         const popupOverlay = tempDiv.querySelector('.movie-popup-overlay');
-        if (popupOverlay) { // Null kontrolü ekledik
+        if (popupOverlay) { // Null kontrolü
           popupOverlay.id = 'popup-template';
           document.body.appendChild(popupOverlay);
           await showPopupFromTemplate(popupOverlay, movie);
@@ -150,31 +150,23 @@ async function showPopupFromTemplate(popupOverlay, movie) {
   // Kapatma butonu
 const closeBtn = popupOverlay.querySelector('.movie-popup-close');
 
-// Repo adını dinamik olarak alalım, böylece hem lokalde hem canlıda çalışır
-const isLocal = window.location.hostname === 'localhost';
-const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
-const basePath = isLocal ? '' : `/${repoName}`; // Canlıda "/CineScript-Team" gibi olacak
-
+// Relative path kullanarak SVG dosyalarına erişim
 closeBtn.addEventListener('mouseenter', () => {
-  // Canlıda: /CineScript-Team/img/svg/close-hover.svg
-  // Lokal: /img/svg/close-hover.svg
-  closeBtn.querySelector('img').src = `${basePath}/img/svg/close-hover.svg`;
+  closeBtn.querySelector('img').src = './img/svg/close-hover.svg';
 });
 
 closeBtn.addEventListener('mouseleave', () => {
-  // Canlıda: /CineScript-Team/img/svg/close.svg
-  // Lokal: /img/svg/close.svg
-  closeBtn.querySelector('img').src = `${basePath}/img/svg/close.svg`;
+  closeBtn.querySelector('img').src = './img/svg/close.svg';
 });
 
 closeBtn.addEventListener('click', () => popupOverlay.remove());
 
-// Herhangi bir yere tıklanınca popup'ı kapat
+// Herhangi bir yere tıklanınca popup'ı kapatma
 popupOverlay.addEventListener('mousedown', function(e) {
   if (e.target === popupOverlay) {
     popupOverlay.remove();
   }
 });
-  // Ekrana ekle
+  // Ekrana ekleme
   document.body.appendChild(popupOverlay);
 }

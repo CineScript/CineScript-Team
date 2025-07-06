@@ -9,7 +9,7 @@
 // import { ... } from './library.js';
 // import { ... } from './footer.js';
 
-import { initCatalog } from './js/catalog.js';
+import './js/catalog.js';
 import { createMoviePopup } from './js/popup.js';
 
 import { showLoader, hideLoader } from './js/loader.js';
