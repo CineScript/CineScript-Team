@@ -30,7 +30,7 @@
   --secondary-black-color: #282828;
   --grey-white-theme-color: #595959;
   --primary-linear-color: linear-gradient(
-    to bottom right,
+    to right bottom,
     rgba(253, 187, 45, 1) 0%,
     rgba(224, 45, 0, 1) 100%
   );
