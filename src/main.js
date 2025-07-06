@@ -7,7 +7,7 @@ import './js/trends.js';
 // import './js/upcoming.js';
 import './js/catalog.js';
 import './js/library.js';
-import './js/footer.js';
+// import './js/footer.js';
 import './js/popup.js';
 import './js/loader.js';
 import './js/scroll-up.js';
