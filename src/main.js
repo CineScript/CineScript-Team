@@ -10,7 +10,7 @@ import './js/footer.js';
 import './js/popup.js';
 import './js/loader.js';
 import './js/scroll-up.js';
-
+import './api/tmdbApi.js';
 import { renderUpcoming } from './js/upcoming.js';
 
 import 'izitoast/dist/css/iziToast.min.css';
