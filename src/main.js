@@ -9,6 +9,8 @@ import './js/upcoming.js';
 import './js/library.js';
 import './js/footer.js';
 
+import { renderUpcoming } from './js/upcoming.js';
+
 import 'izitoast/dist/css/iziToast.min.css';
 
 document.addEventListener('DOMContentLoaded', renderUpcoming);
