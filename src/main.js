@@ -1,9 +1,10 @@
+import { renderUpcoming } from './js/upcoming.js';
 import './js/header.js';
 import './js/hero.js';
 import './js/catalog-hero.js';
 import './js/library-hero.js';
 import './js/trends.js';
-import './js/upcoming.js';
+// import './js/upcoming.js';
 import './js/catalog.js';
 import './js/library.js';
 import './js/footer.js';
@@ -11,7 +12,6 @@ import './js/popup.js';
 import './js/loader.js';
 import './js/scroll-up.js';
 import './api/tmdbApi.js';
-import { renderUpcoming } from './js/upcoming.js';
 
 import 'izitoast/dist/css/iziToast.min.css';
 
