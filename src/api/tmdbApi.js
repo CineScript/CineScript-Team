@@ -45,11 +45,3 @@ export async function searchMovies(query, year = "") {
   return await res.json();
 }
 
-// Tür listesini getir
-export async function fetchGenres() {
-    const res = await axios.get(`${BASE_URL}/genre/movie/list`, {
-    params: { api_key: API_KEY, language: LANGUAGE },
-  });
-  return res.data;
-}
-
