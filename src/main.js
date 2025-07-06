@@ -8,12 +8,9 @@ import './js/upcoming.js';
 // import { ... } from './catalog.js';
 import './js/library.js';
 import './js/footer.js';
-
-import 'izitoast/dist/css/iziToast.min.css';
-
 import { renderUpcoming } from './js/upcoming.js';
 
-document.addEventListener('DOMContentLoaded', renderUpcoming);
+import 'izitoast/dist/css/iziToast.min.css';
 
 document.addEventListener('DOMContentLoaded', () => {
   const upcomingSection = document.getElementById('upcoming');
