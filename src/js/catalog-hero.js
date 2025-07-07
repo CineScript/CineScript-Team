@@ -23,6 +23,8 @@ function setupHeroEvents() {
 
       const randomMovie = movies[Math.floor(Math.random() * movies.length)];
       currentMovieId = randomMovie.id;
+    const posterPath = randomMovie.backdrop_path || randomMovie.poster_path;
+    const bgUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
 
       const posterPath = randomMovie.backdrop_path || randomMovie.poster_path;
       const bgUrl = `https://image.tmdb.org/t/p/w1280${posterPath}`;
