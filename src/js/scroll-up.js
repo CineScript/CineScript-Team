@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const scrollUpBtn = document.querySelector('#scrollUpBtn');
 
 const scrollThreshold = 300;
@@ -24,3 +25,5 @@ scrollUpBtn.addEventListener('click', function () {
     behavior: 'smooth',
   });
 });
+=======
+>>>>>>> parent of d3c76ef (feat: scroll up özelliği eklendi; library hero için JS import yolu düzeltildi)
