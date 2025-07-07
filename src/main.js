@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Stil ve bağımlılıkları
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -47,11 +48,47 @@ async function loadPartials() {
         }
       } catch (err) {
         console.error('Yükleme hatası:', err);
+=======
+// burada ... kısmına yazılan js dosyalarındaki aktarılacak tanım isimleri gelecek. isimler virgül ile ayrılmalıdır.
+import { initHeader } from './js/header.js';
+import { renderWeeklyTrends } from './js/trends.js';
+import { showHeroBasedOnAPI } from './js/hero.js';
+// import { ... } from './catalog-hero.js';
+// import { ... } from './library-hero.js';
+// import { ... } from './trends.js';
+// import { ... } from './upcoming.js';
+// import { ... } from './catalog.js';
+// import { ... } from './library.js';
+// import { ... } from './footer.js';
+
+// KAYITLI TEMA VARSA YÜKLE
+const htmlEl = document.documentElement;
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  htmlEl.setAttribute('data-theme', savedTheme);
+}
+
+// HTML PARÇALARI (partials klasöründen) yükleniyor
+async function loadPartials() {
+  const loads = document.querySelectorAll('load');
+  for (const el of loads) {
+    const src = el.getAttribute('src');
+    if (src) {
+      const res = await fetch(src);
+      if (res.ok) {
+        const html = await res.text();
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+        el.replaceWith(wrapper);
+      } else {
+        console.error('Partial yüklenemedi:', src);
+>>>>>>> 05c75ec (değişiklikler eklendi)
       }
     }
   }
 }
 
+<<<<<<< HEAD
 // ✅ Partial'lar yüklendikten sonra her bölümü başlat
 loadPartials().then(async () => {
   try {
@@ -84,4 +121,11 @@ loadPartials().then(async () => {
   } catch (error) {
     console.error('Bölümler başlatılırken hata oluştu:', error);
   }
+=======
+// SAYFA YÜKLENİNCE
+loadPartials().then(() => {
+  initHeader(); // header.js içindeki fonksiyon çağrılır
+  showHeroBasedOnAPI();
+  fetchWeeklyTrends();
+>>>>>>> 05c75ec (değişiklikler eklendi)
 });

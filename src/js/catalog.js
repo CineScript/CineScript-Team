@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { fetchWeeklyTrending, searchMovies } from '../api/tmdbApi.js';
 import { createMoviePopup } from './popup.js';
 
@@ -116,3 +117,15 @@ export async function initCatalog() {
   // Başlangıçta clear butonunu gizle
   clearBtn.style.display = 'none';
 }
+=======
+import {
+  fetchPopularMovies,
+  fetchDailyTrending,
+  fetchWeeklyTrending,
+  fetchUpcomingMovies,
+  searchMovies,
+  fetchGenres,
+  fetchMovieDetails,
+  fetchMovieVideos,
+} from '../api/tmdbApi.js';
+>>>>>>> 05c75ec (değişiklikler eklendi)
