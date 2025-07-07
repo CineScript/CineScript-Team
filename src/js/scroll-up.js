@@ -16,7 +16,6 @@ function scrollFunction() {
     scrollUpBtn.style.display = 'none';
   }
 }
-
 scrollUpBtn.addEventListener('click', function () {
   window.scrollTo({
     top: 0,
