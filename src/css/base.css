@@ -51,7 +51,7 @@
   --white-theme-shadow: drop-shadow(1, 1, 14, 4, rgba(0, 0, 0, 0.22));
 
   color: var(--white-color);
-  background-color: var(--black-color);
+  background-color: var(--background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -90,6 +90,7 @@ body {
   letter-spacing: 0;
   font-weight: var(--fw-regular);
   overflow-x: hidden;
+  background-color: var(--background-color);
 }
 
 section {
