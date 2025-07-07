@@ -1,24 +1,25 @@
-const scrollUpBtn = document.querySelector('#scrollUpBtn');
 
-const scrollThreshold = 300;
+// const scrollUpBtn = document.querySelector('#scrollUpBtn');
 
-window.onscroll = function () {
-  scrollFunction();
-};
+// const scrollThreshold = 300;
 
-function scrollFunction() {
-  if (
-    document.body.scrollTop > scrollThreshold ||
-    document.documentElement.scrollTop > scrollThreshold
-  ) {
-    scrollUpBtn.style.display = 'block';
-  } else {
-    scrollUpBtn.style.display = 'none';
-  }
-}
-scrollUpBtn.addEventListener('click', function () {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-});
+// window.onscroll = function () {
+//   scrollFunction();
+// };
+
+// function scrollFunction() {
+//   if (
+//     document.body.scrollTop > scrollThreshold ||
+//     document.documentElement.scrollTop > scrollThreshold
+//   ) {
+//     scrollUpBtn.style.display = 'block';
+//   } else {
+//     scrollUpBtn.style.display = 'none';
+//   }
+// }
+// scrollUpBtn.addEventListener('click', function () {
+//   window.scrollTo({
+//     top: 0,
+//     behavior: 'smooth',
+//   });
+// });

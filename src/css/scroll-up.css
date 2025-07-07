@@ -1,6 +1,7 @@
+
 /* Scroll Up Butonu için Mobil Cihaz Stilleri */
 
-.scroll-up {
+/* .scroll-up {
   display: none;
   position: fixed;
   bottom: 15px;
@@ -26,24 +27,26 @@
   border: 1px solid var(--orange-color);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
+} */
 
 /* Scroll Up Butonu için Tablet Cihaz Stilleri */
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   .scroll-up {
     bottom: 25px;
     right: 25px;
     padding: 18px 22px;
     font-size: 20px;
   }
-}
+} */
 
 /* Scroll Up Butonu için Masaüstü Cihaz Stilleri */
-@media only screen and (min-width: 1280px) {
+/* @media only screen and (min-width: 1280px) {
   .scroll-up {
     bottom: 30px;
     right: 30px;
     padding: 20px 25px;
     font-size: 22px;
   }
-}
+} */
+
+
