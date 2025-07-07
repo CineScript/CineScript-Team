@@ -22,8 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 import { initCatalog } from './js/catalog.js';
 import { createMoviePopup } from './js/popup.js';
 import { showLoader, hideLoader } from './js/loader.js';
-import './js/scroll-up.js';
-import './js/library-hero.js';
+
 import './js/library.js';
 async function loadPartials() {
   const loads = document.querySelectorAll('load');
