@@ -6,8 +6,8 @@ import {
   searchMovies,
   fetchGenres,
   fetchMovieDetails,
-  fetchMovieVideos
-} from "../api/tmdbApi.js";
+  fetchMovieVideos,
+} from '../api/tmdbApi.js';
 
 let genreMap = null;
 
@@ -61,70 +61,79 @@ function updateButtonState(movie, button) {
 }
 
 export async function createMoviePopup(movie) {
-  // popup.html'den şablonu klonla
-  let template = document.querySelector('#popup-template');
-  if (!template) {
-    // Eğer template yoksa partials/popup.html'i fetch et ve ekle
-    const isLocal = window.location.hostname === 'localhost';
-    let popupPath;
-
-    if (isLocal) {
-      // Lokal geliştirme için: Public klasöründeki dosyalara '/' ile erişilir
-      popupPath = '/popup.html';
-    } else {
-      // Canlı ortam için: GitHub Pages'da repo adıyla birlikte
-      const repoName = window.location.pathname.split('/')[1];
-      popupPath = `/${repoName}/popup.html`;
-    }
-
-    fetch(popupPath)
-      .then(res => {
-        if (!res.ok) {
-          console.error(`Popup.html yüklenemedi. Durum: ${res.status}, URL: ${res.url}`);
-          throw new Error('Network response was not ok.');
-        }
-        return res.text();
-      })
-      .then(async html => {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        const popupOverlay = tempDiv.querySelector('.movie-popup-overlay');
-        if (popupOverlay) { // Null kontrolü ekledik
-          popupOverlay.id = 'popup-template';
-          document.body.appendChild(popupOverlay);
-          await showPopupFromTemplate(popupOverlay, movie);
-        } else {
-          console.error("movie-popup-overlay bulunamadı, HTML içeriği yanlış olabilir.");
-        }
-      })
-      .catch(error => {
-        console.error("Popup yüklenirken bir hata oluştu:", error);
-      });
+  if (!movie || typeof movie !== 'object') {
+    console.error('createMoviePopup: Geçersiz movie parametresi!', movie);
     return;
   }
 
-  // Template zaten varsa klonla ve göster
+  let template = document.querySelector('#popup-template');
+  if (!template) {
+    const isLocal = window.location.hostname === 'localhost';
+    let popupPath = isLocal
+      ? '/popup.html'
+      : `/${window.location.pathname.split('/')[1]}/popup.html`;
+
+    try {
+      const res = await fetch(popupPath);
+      if (!res.ok) {
+        console.error(
+          `Popup.html yüklenemedi. Durum: ${res.status}, URL: ${res.url}`
+        );
+        throw new Error('Network response was not ok.');
+      }
+      const html = await res.text();
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      const popupOverlay = tempDiv.querySelector('.movie-popup-overlay');
+      if (popupOverlay) {
+        popupOverlay.id = 'popup-template';
+        document.body.appendChild(popupOverlay);
+        await showPopupFromTemplate(popupOverlay, movie);
+      } else {
+        console.error(
+          'movie-popup-overlay bulunamadı, HTML içeriği eksik olabilir.'
+        );
+      }
+    } catch (error) {
+      console.error('Popup yüklenirken bir hata oluştu:', error);
+    }
+    return;
+  }
+
   const popupOverlay = template.cloneNode(true);
   popupOverlay.id = '';
   await showPopupFromTemplate(popupOverlay, movie);
 }
 
-
 async function showPopupFromTemplate(popupOverlay, movie) {
+  if (!movie || typeof movie !== 'object') {
+    console.error('Geçersiz movie verisi:', movie);
+    return;
+  }
+
   popupOverlay.style.display = 'flex';
+
   // Görsel
   const img = popupOverlay.querySelector('.movie-popup-img');
-  img.src = movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : '';
-  img.alt = movie.title;
+  img.src = movie.poster_path
+    ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+    : '';
+  img.alt = movie.title || 'No title';
+
   // Başlık
-  popupOverlay.querySelector('.movie-popup-title').textContent = movie.title;
+  popupOverlay.querySelector('.movie-popup-title').textContent =
+    movie.title || 'Untitled';
+
   // Vote/votes
-  const formattedVote = movie.vote_average != null ? movie.vote_average.toFixed(1) : '-';
-  popupOverlay.querySelector('.vote-avg').textContent = formattedVote;
-  popupOverlay.querySelector('.vote-count').textContent = movie.vote_count ?? '-';
+  popupOverlay.querySelector('.vote-avg').textContent =
+    movie.vote_average != null ? movie.vote_average.toFixed(1) : '-';
+  popupOverlay.querySelector('.vote-count').textContent =
+    movie.vote_count != null ? movie.vote_count : '-';
+
   // Popularity
-  const formattedPopularity = movie.popularity != null ? movie.popularity.toFixed(1) : '-';
-  popupOverlay.querySelector('.popularity-value').textContent = formattedPopularity;
+  popupOverlay.querySelector('.popularity-value').textContent =
+    movie.popularity != null ? movie.popularity.toFixed(1) : '-';
+
   // Genre
   let genreText = '-';
   if (movie.genre_names && Array.isArray(movie.genre_names)) {
@@ -134,47 +143,42 @@ async function showPopupFromTemplate(popupOverlay, movie) {
     genreText = movie.genre_ids.map(id => map[id] || id).join(', ');
   }
   popupOverlay.querySelector('.genre-value').textContent = genreText;
-  // About
-  popupOverlay.querySelector('.about-value').textContent = movie.overview || 'No description.';
 
-  // Buton seçimi ve durumu güncelleme & event ekleme
+  // About
+  popupOverlay.querySelector('.about-value').textContent =
+    movie.overview || 'No description.';
+
+  // Library butonu
   const addBtn = popupOverlay.querySelector('.movie-popup-add-btn');
   if (addBtn) {
     updateButtonState(movie, addBtn);
-
-    addBtn.addEventListener('click', function() {
+    addBtn.addEventListener('click', function () {
       toggleLibrary(movie, this);
     });
   }
 
-  // Kapatma butonu
-const closeBtn = popupOverlay.querySelector('.movie-popup-close');
+  // Kapatma butonu ve ikon davranışları
+  const closeBtn = popupOverlay.querySelector('.movie-popup-close');
+  const isLocal = window.location.hostname === 'localhost';
+  const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
+  const basePath = isLocal ? '' : `/${repoName}`;
 
-// Repo adını dinamik olarak alalım, böylece hem lokalde hem canlıda çalışır
-const isLocal = window.location.hostname === 'localhost';
-const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
-const basePath = isLocal ? '' : `/${repoName}`; // Canlıda "/CineScript-Team" gibi olacak
+  closeBtn.addEventListener('mouseenter', () => {
+    closeBtn.querySelector('img').src = `${basePath}/img/svg/close-hover.svg`;
+  });
 
-closeBtn.addEventListener('mouseenter', () => {
-  // Canlıda: /CineScript-Team/img/svg/close-hover.svg
-  // Lokal: /img/svg/close-hover.svg
-  closeBtn.querySelector('img').src = `${basePath}/img/svg/close-hover.svg`;
-});
+  closeBtn.addEventListener('mouseleave', () => {
+    closeBtn.querySelector('img').src = `${basePath}/img/svg/close.svg`;
+  });
 
-closeBtn.addEventListener('mouseleave', () => {
-  // Canlıda: /CineScript-Team/img/svg/close.svg
-  // Lokal: /img/svg/close.svg
-  closeBtn.querySelector('img').src = `${basePath}/img/svg/close.svg`;
-});
+  closeBtn.addEventListener('click', () => popupOverlay.remove());
 
-closeBtn.addEventListener('click', () => popupOverlay.remove());
+  popupOverlay.addEventListener('mousedown', function (e) {
+    if (e.target === popupOverlay) {
+      popupOverlay.remove();
+    }
+  });
 
-// Herhangi bir yere tıklanınca popup'ı kapat
-popupOverlay.addEventListener('mousedown', function(e) {
-  if (e.target === popupOverlay) {
-    popupOverlay.remove();
-  }
-});
   // Ekrana ekle
   document.body.appendChild(popupOverlay);
 }
