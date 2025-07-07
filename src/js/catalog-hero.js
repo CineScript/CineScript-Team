@@ -26,8 +26,6 @@ function setupHeroEvents() {
     const posterPath = randomMovie.backdrop_path || randomMovie.poster_path;
     const bgUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
 
-      const posterPath = randomMovie.backdrop_path || randomMovie.poster_path;
-      const bgUrl = `https://image.tmdb.org/t/p/w1280${posterPath}`;
       heroSection.style.backgroundImage = `url(${bgUrl})`;
 
       titleEl.textContent = randomMovie.title || randomMovie.name || 'Untitled';
