@@ -1,34 +1,3 @@
-<<<<<<< HEAD
-// burada ... kısmına yazılan js dosyalarındaki aktarılacak tanım isimleri gelecek. isimler virgül ile ayrılmalıdır.
-// import { ... } from './header.js';
-// import { ... } from './hero.js';
-// import { ... } from './catalog-hero.js';
-// import { ... } from './library-hero.js';
-// import { ... } from './trends.js';
-// import { ... } from './upcoming.js';
-// import { ... } from './catalog.js';
-// import { ... } from './library.js';
-// import { ... } from './footer.js';
-
-import { initCatalog } from './js/catalog.js';
-
-const themeButtons = document.querySelectorAll('[data-theme-option]');
-const htmlEl = document.documentElement;
-
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  htmlEl.setAttribute('data-theme', savedTheme);
-}
-
-themeButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const selectedTheme = button.getAttribute('data-theme-option');
-    htmlEl.setAttribute('data-theme', selectedTheme);
-    localStorage.setItem('theme', selectedTheme);
-  });
-});
-
-=======
 // Stil ve bağımlılıkları
 import 'izitoast/dist/css/iziToast.min.css';
 // Sayfa bölümleri
@@ -56,22 +25,11 @@ import { initCatalog } from './js/catalog.js';
 import { createMoviePopup } from './js/popup.js';
 import { showLoader, hideLoader } from './js/loader.js';
 import './js/library.js';
->>>>>>> 294fd51cd64d8f02c6b4768364170b6f42ab2c30
 async function loadPartials() {
   const loads = document.querySelectorAll('load');
   for (const el of loads) {
     const src = el.getAttribute('src');
     if (src) {
-<<<<<<< HEAD
-      const res = await fetch(src);
-      if (res.ok) {
-        const html = await res.text();
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = html;
-        el.replaceWith(wrapper);
-      } else {
-        console.error('Partial yüklenemedi:', src);
-=======
       try {
         const res = await fetch(src);
         if (res.ok) {
@@ -84,18 +42,10 @@ async function loadPartials() {
         }
       } catch (err) {
         console.error('Yükleme hatası:', err);
->>>>>>> 294fd51cd64d8f02c6b4768364170b6f42ab2c30
       }
     }
   }
 }
-<<<<<<< HEAD
-
-loadPartials().then(() => {
-  initCatalog();
-});
-
-=======
 // :white_check_mark: Partial'lar yüklendikten sonra her bölümü başlat
 loadPartials().then(async () => {
   try {
@@ -126,4 +76,3 @@ loadPartials().then(async () => {
     console.error('Bölümler başlatılırken hata oluştu:', error);
   }
 });
->>>>>>> 294fd51cd64d8f02c6b4768364170b6f42ab2c30
