@@ -18,7 +18,7 @@ async function renderRandomHeroMovie() {
     currentMovieId = randomMovie.id;
 
     const posterPath = randomMovie.backdrop_path || randomMovie.poster_path;
-    const bgUrl = `https://image.tmdb.org/t/p/w1280${posterPath}`;
+    const bgUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
 
     heroSection.style.backgroundImage = `url(${bgUrl})`;
 
