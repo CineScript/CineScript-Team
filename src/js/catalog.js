@@ -1,60 +1,50 @@
-import {
-  fetchPopularMovies,
-  fetchDailyTrending,
-  fetchWeeklyTrending,
-  fetchUpcomingMovies,
-  searchMovies,
-} from '../api/tmdbApi.js';
-import './catalog-hero.js';
-import '../css/modal-trailer.css';
+import { fetchWeeklyTrending, searchMovies } from '../api/tmdbApi.js';
 import { createMoviePopup } from './popup.js';
 
-console.log('catalog.js yüklendi!');
-
-const form = document.getElementById('search-form');
-const movieList = document.getElementById('movie-list');
-const noResults = document.getElementById('no-results');
-const yearSelect = document.getElementById('year-select');
+let form, movieList, noResults, yearSelect, clearBtn;
+let currentPage = 1;
+let currentQuery = '';
+let currentYear = '';
 
 function enableMoviePopups() {
   movieList.addEventListener('click', e => {
     const li = e.target.closest('li.movie-item');
-    if (!li) return;
-    const idx = Array.from(movieList.children).indexOf(li);
-    const movies = Array.from(movieList.children)
-      .map(li => li._movieData)
-      .filter(Boolean);
-    const movie = movies[idx];
-    if (movie) createMoviePopup(movie);
+    if (!li || !li._movieData) return;
+    createMoviePopup(li._movieData);
   });
 }
 
 function renderMovies(movies) {
   movieList.innerHTML = '';
+
   if (!movies || movies.length === 0) {
     noResults.style.display = 'block';
     return;
   }
+
   noResults.style.display = 'none';
-  const moviesToShow = movies.slice(0, 21);
-  moviesToShow.forEach(movie => {
-    const li = document.createElement('li');
-    li.classList.add('movie-item');
-    li.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/original${movie.poster_path}" alt="${
-      movie.title
-    }" />
-      <h3>${movie.title}</h3>
-      <p>Yayın Tarihi: ${movie.release_date || 'Bilinmiyor'}</p>
-    `;
-    li._movieData = movie;
-    movieList.appendChild(li);
-  });
+
+  movies
+    .filter(m => m && m.poster_path)
+    .forEach(movie => {
+      const li = document.createElement('li');
+      li.classList.add('movie-item');
+      li.innerHTML = `
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
+        movie.title
+      }" />
+        <div class="movie-item-text">
+          <h3>${movie.title}</h3>
+          <p>${movie.release_date?.split('-')[0] || 'Unknown'}</p>
+        </div>`;
+      li._movieData = movie;
+      movieList.appendChild(li);
+    });
 }
 
 function populateYearSelect() {
-  const currentYear = new Date().getFullYear();
-  for (let y = currentYear; y >= 1900; y--) {
+  const now = new Date().getFullYear();
+  for (let y = now; y >= 1900; y--) {
     const option = document.createElement('option');
     option.value = y;
     option.textContent = y;
@@ -62,88 +52,67 @@ function populateYearSelect() {
   }
 }
 
+async function loadTrending() {
+  try {
+    const data = await fetchWeeklyTrending();
+    renderMovies(data.results);
+  } catch (err) {
+    noResults.textContent = 'Failed to load movies.';
+    noResults.style.display = 'block';
+  }
+}
+
+async function performSearch(query, year = '') {
+  try {
+    const data = await searchMovies(query, year);
+    renderMovies(data.results);
+  } catch (err) {
+    noResults.textContent = 'Search failed.';
+    noResults.style.display = 'block';
+  }
+}
+
 export async function initCatalog() {
-  console.log('initCatalog fonksiyonu çağrıldı!');
-  if (!form || !movieList || !noResults || !yearSelect) {
-    console.error('Catalog için gerekli DOM elemanları bulunamadı!');
+  form = document.getElementById('search-form');
+  movieList = document.getElementById('movie-list');
+  noResults = document.getElementById('no-results');
+  yearSelect = document.getElementById('year-select');
+  clearBtn = document.getElementById('clear-search');
+
+  if (!form || !movieList || !noResults || !yearSelect || !clearBtn) {
+    console.error('Catalog init error: Missing DOM elements');
     return;
   }
 
   populateYearSelect();
+  await loadTrending();
+  enableMoviePopups();
 
-  try {
-    const [popularData, dailyData, weeklyData, upcomingData] =
-      await Promise.all([
-        fetchPopularMovies(),
-        fetchDailyTrending(),
-        fetchWeeklyTrending(),
-        fetchUpcomingMovies(),
-      ]);
+  // Submit (search) action
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const query = form.query.value.trim();
+    const year = yearSelect.value;
+    currentQuery = query;
+    currentYear = year;
+    if (query) {
+      await performSearch(query, year);
+    }
+  });
 
-    const allMovies = [
-      ...popularData.results,
-      ...dailyData.results,
-      ...weeklyData.results,
-      ...upcomingData.results,
-    ];
+  // Show/hide clear button on input
+  form.query.addEventListener('input', () => {
+    clearBtn.style.display = form.query.value ? 'block' : 'none';
+  });
 
-    const uniqueMovies = new Map();
-    allMovies.forEach(m => {
-      if (!uniqueMovies.has(m.id)) uniqueMovies.set(m.id, m);
-    });
+  // Clear button resets form and loads trending again
+  clearBtn.addEventListener('click', () => {
+    form.query.value = '';
+    yearSelect.value = '';
+    clearBtn.style.display = 'none';
+    loadTrending();
+  });
 
-    renderMovies(Array.from(uniqueMovies.values()));
-
-    // Arama formu submit
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-
-      const query = document.getElementById('search-input').value.trim();
-      const year = yearSelect.value;
-
-      if (!query) return;
-
-      try {
-        const data = await searchMovies(query);
-        let filteredResults = data.results;
-
-        if (year) {
-          filteredResults = filteredResults.filter(
-            m => m.release_date && m.release_date.startsWith(year)
-          );
-        }
-
-        renderMovies(filteredResults);
-
-        if (filteredResults.length === 0) {
-          noResults.style.display = 'block';
-          noResults.textContent =
-            'Aradığınız kriterlere uygun film bulunamadı.';
-        } else {
-          noResults.style.display = 'none';
-
-          // Yıl seçiciyi görünür yap
-          yearSelect.style.display = 'inline-block';
-
-          // Yıl seçiciyi arama kutusu ile buton arasına taşı
-          const searchBtn = form.querySelector('.search-button');
-          if (searchBtn && yearSelect) {
-            form.insertBefore(yearSelect, searchBtn);
-          }
-        }
-      } catch (error) {
-        console.error('Arama sırasında hata oluştu:', error);
-        noResults.style.display = 'block';
-        noResults.textContent = 'Film bulunamadı veya bir hata oluştu.';
-      }
-    });
-  } catch (error) {
-    console.error('Filmler yüklenirken hata:', error);
-    noResults.style.display = 'block';
-    noResults.textContent = 'Filmler yüklenirken hata oluştu.';
-  }
+  // Başlangıçta clear butonunu gizle
+  clearBtn.style.display = 'none';
 }
-
-// Otomatik başlat
-initCatalog();
-enableMoviePopups();
