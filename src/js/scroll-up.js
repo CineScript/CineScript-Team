@@ -14,7 +14,6 @@ function scrollFunction() {
     scrollUpBtn.style.display = 'block';
   } else {
     scrollUpBtn.style.display = 'none';
-    console.log('Scroll up button çalışmadı');
   }
 }
 
