@@ -13,19 +13,28 @@ async function renderRandomHeroMovie() {
     const data = await fetchDailyTrending();
     const movies = data.results;
 
-    const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+    if (!movies || movies.length === 0) {
+      console.error('Trend filmler bulunamadı.');
+      return;
+    }
 
+    const randomMovie = movies[Math.floor(Math.random() * movies.length)];
     currentMovieId = randomMovie.id;
 
     const posterPath = randomMovie.backdrop_path || randomMovie.poster_path;
-    const bgUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
 
-    heroSection.style.backgroundImage = `url(${bgUrl})`;
+    if (posterPath) {
+      const bgUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
+      heroSection.style.backgroundImage = `url(${bgUrl})`;
+    } else {
+      heroSection.style.backgroundColor = '#000';
+    }
 
-    titleEl.textContent = randomMovie.title || randomMovie.name || 'Untitled';
-    overviewEl.textContent = randomMovie.overview || 'No description available';
+    titleEl.textContent =
+      randomMovie.title || randomMovie.name || 'Film adı yok';
+    overviewEl.textContent = randomMovie.overview || 'Açıklama bulunamadı.';
   } catch (error) {
-    console.error('Error loading hero section:', error);
+    console.error('Hero bölümü yüklenirken hata:', error);
   }
 }
 
@@ -36,6 +45,11 @@ async function handleTrailerClick() {
     const data = await fetchMovieVideos(currentMovieId);
     const videos = data.results;
 
+    if (!videos || videos.length === 0) {
+      alert('Bu film için video bulunamadı.');
+      return;
+    }
+
     const trailer = videos.find(
       v => v.type === 'Trailer' && v.site === 'YouTube'
     );
@@ -43,16 +57,16 @@ async function handleTrailerClick() {
     if (trailer) {
       openTrailerModal(trailer.key);
     } else {
-      alert('No trailer available.');
+      alert('Fragman bulunamadı.');
     }
   } catch (error) {
-    console.error('Trailer error:', error);
+    console.error('Fragman yüklenirken hata:', error);
   }
 }
 
 trailerBtn.addEventListener('click', handleTrailerClick);
 detailsBtn.addEventListener('click', () => {
-  alert('More details tıklanıldı!');
+  alert('More details tıklandı!');
 });
 
 renderRandomHeroMovie();

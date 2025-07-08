@@ -4,7 +4,7 @@ modal.classList.add('trailer-modal', 'is-hidden');
 modal.innerHTML = `
   <div class="trailer-modal-backdrop">
     <div class="trailer-modal-content">
-      <button class="trailer-modal-close">&times;</button>
+      <button class="trailer-modal-close" aria-label="Close modal">&times;</button>
       <iframe
         id="trailer-video"
         width="100%"
