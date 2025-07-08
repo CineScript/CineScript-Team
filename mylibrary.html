@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Library</title>
     <script type="module" crossorigin src="/CineScript-Team/mylibrary.js"></script>
-    <link rel="modulepreload" crossorigin href="/CineScript-Team/assets/scroll-up-CDn1vSJK.js">
-    <link rel="modulepreload" crossorigin href="/CineScript-Team/assets/main-CBfAHlpt.js">
-    <link rel="stylesheet" crossorigin href="/CineScript-Team/assets/scroll-up-DqUOP5ef.css">
+    <link rel="modulepreload" crossorigin href="/CineScript-Team/assets/scroll-up-C8J8yvIH.js">
+    <link rel="modulepreload" crossorigin href="/CineScript-Team/assets/main-DWsmwN1R.js">
+    <link rel="stylesheet" crossorigin href="/CineScript-Team/assets/scroll-up-DZv4ZzWx.css">
   </head>
   <body>
     <header class="header" id="header">header section</header>
@@ -29,8 +29,48 @@
     </div>
   </div>
 </section>
+      <section class="library" id="library">
+  <div class="library-placeholder" id="library-placeholder">
+    <h2 class="library-text">
+      OOPPS..<br />
+      We are very sorry!<br />
+      You don't have any movies at your library.
+    </h2>
+    <button type="button" class="btn-primary library-btn search" id="go-to-catalog">
+      Search movie
+    </button>
+  </div>
 
-      <section class="library" id="library">library section..</section>
+  <div class="library-genre-section">
+    <div class="library-custom-select">
+      <div class="library-selected-option">
+        Genre
+        <img
+          src="data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M3.5%2010.25L8%205.75L12.5%2010.25'%20stroke='white'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e"
+          alt="Dropdown arrow"
+          class="library-dropdown-icon"
+        />
+      </div>
+      <ul class="library-genre-options hidden">
+        <!-- JavaScript ile buraya li'ler eklenecek -->
+      </ul>
+    </div>
+
+    <div class="library-film-list-section">
+      <ul id="library-film-list" class="library-film-list">
+        <!-- JavaScript ile buraya li'ler eklenecek -->
+      </ul>
+      <button id="load-more-btn" class="btn-primary library-btn load-more-btn">
+        Load More
+      </button>
+    </div>
+  </div>
+
+<div id="library-loading" class="library-loading" style="display: none;">
+  Loading...
+</div>
+
+</section>
 
     </main>
 
@@ -42,5 +82,6 @@
     <button id="scrollUpBtn" title="Scroll Up" class="scroll-up">⬆</button>
 
 
+   
   </body>
 </html>
