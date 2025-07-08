@@ -70,7 +70,7 @@ export async function createMoviePopup(movie) {
 
     if (isLocal) {
       // Lokal geliştirme için: Public klasöründeki dosyalara '/' ile erişilir
-      popupPath = './partials/popup.html';
+      popupPath = '/popup.html';
     } else {
       // Canlı ortam için: GitHub Pages'da repo adıyla birlikte
       const repoName = window.location.pathname.split('/')[1];
