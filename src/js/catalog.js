@@ -143,5 +143,8 @@ export async function initCatalog() {
 }
 
 // Otomatik başlat
-initCatalog();
-enableMoviePopups();
+document.addEventListener('DOMContentLoaded', () => {
+  initCatalog();
+  enableMoviePopups();
+});
+
