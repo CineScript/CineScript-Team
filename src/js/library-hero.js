@@ -24,6 +24,7 @@ async function setHeroBackground() {
     console.error('Hero görseli yüklenemedi:', error);
     // CSS fallback devrede kalır
   }
+  
 }
 
 setHeroBackground();

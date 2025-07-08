@@ -11,9 +11,6 @@
 
 import { initCatalog } from './js/catalog.js';
 import { createMoviePopup } from './js/popup.js';
-
-import { showLoader, hideLoader } from './js/loader.js';
-
 import './js/library.js';
 
 const themeButtons = document.querySelectorAll('[data-theme-option]');
@@ -51,5 +48,5 @@ async function loadPartials() {
 }
 
 loadPartials().then(() => {
-  initCatalog();
+initCatalog();
 });
