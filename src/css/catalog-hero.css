@@ -1,75 +1,90 @@
 .catalog-hero {
   position: relative;
-  color: #fff;
-  min-height: 500px;
-
-  /* Arka plan */
-  background-size: 100% auto;
-  background-position: center top;
+  min-height: 600px;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-attachment: scroll;
-
-  max-width: 100%;
-  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  color: white;
 }
 
-/* Görselin üstüne koyu filtre */
 .catalog-hero-overlay {
-  background: rgba(0, 0, 0, 0.5);
+  flex: 1;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85) 30%,
+    rgba(0, 0, 0, 0.2) 80%,
+    transparent
+  );
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding-left: 40px;
 }
 
-.catalog-hero-container {
-  padding: 0 16px;
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto;
+.catalog-hero-content {
+  max-width: 600px;
+  padding: 40px 20px;
 }
 
-/* 768px kırılımı */
-@media (min-width: 768px) {
-  .catalog-hero {
-    background-size: 768px auto;
-  }
+.catalog-hero-title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
 
-  .catalog-hero-container {
-    max-width: 768px;
-  }
+.catalog-hero-rating {
+  color: #ff9900;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
 
-  .catalog-hero {
-    min-height: 600px;
-  }
+.catalog-hero-overview {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  color: #ddd;
+}
 
+.catalog-hero-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.catalog-hero-btn {
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.catalog-hero-btn.trailer {
+  background: linear-gradient(90deg, #f87501, #ff3c00);
+  color: #fff;
+}
+
+.catalog-hero-btn.details {
+  background: transparent;
+  border: 1px solid white;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
   .catalog-hero-title {
-    font-size: 32px;
+    font-size: 28px;
   }
-
   .catalog-hero-overview {
-    font-size: 16px;
+    font-size: 14px;
   }
-
   .catalog-hero-btn {
-    font-size: 16px;
+    font-size: 14px;
+    padding: 10px 16px;
   }
-}
-
-/* 1280px kırılımı */
-@media (min-width: 1280px) {
-  .catalog-hero {
-    background-size: 1280px auto;
-  }
-
-  .catalog-hero-container {
-    max-width: 1280px;
-  }
-
-  .catalog-hero {
-    min-height: 720px;
-  }
-
-  .catalog-hero-title {
-    font-size: 48px;
+  .catalog-hero-overlay {
+    padding-left: 16px;
+    background: rgba(0, 0, 0, 0.7);
   }
 }
