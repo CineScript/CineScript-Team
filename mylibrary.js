@@ -1,0 +1,2 @@
+import{f as a}from"./assets/scroll-up-CDn1vSJK.js";import"./assets/main-CBfAHlpt.js";async function c(){const r=document.querySelector(".library-hero-bg");if(r)try{const e=(await a())?.results;if(!e||e.length===0)return;const o=e[Math.floor(Math.random()*e.length)]?.backdrop_path;if(o){const n=`https://image.tmdb.org/t/p/w1920${o}`;r.style.backgroundImage=`url('${n}')`,r.style.backgroundSize="cover",r.style.backgroundPosition="center"}}catch(t){console.error("Hero görseli yüklenemedi:",t)}}c();
+//# sourceMappingURL=mylibrary.js.map
