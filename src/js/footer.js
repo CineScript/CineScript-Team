@@ -8,7 +8,7 @@ export function initFooterModal() {
   const slides = document.querySelectorAll('.team-card');
 
   if (!openBtn || !modalOverlay || !closeBtn) {
-    console.warn('Footer modal için gerekli öğeler bulunamadı.');
+    alert('❗ Footer modal için gerekli öğeler bulunamadı.');
     return;
   }
 

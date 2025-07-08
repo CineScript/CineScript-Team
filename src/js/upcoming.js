@@ -1,8 +1,4 @@
-import axios from 'axios';
-import iziToast from 'izitoast';
-import { API_KEY, BASE_URL } from '../api/tmdbApi';
-
-const LANGUAGE = 'en-US'; // Artık burada
+import { fetchUpcomingMovies, fetchGenres } from '../api/tmdbApi.js';
 
 let currentPage = 1;
 let cachedUpcoming = [];
@@ -11,55 +7,30 @@ function round(value) {
   return Math.round(value * 10) / 10;
 }
 
+function getLibrary() {
+  return JSON.parse(localStorage.getItem('library')) || [];
+}
+
 function isInLibrary(id) {
-  const lib = JSON.parse(localStorage.getItem('myLibrary')) || [];
+  const lib = getLibrary();
   return lib.some(movie => movie.id === id);
 }
 
 function toggleLibrary(movie, btn) {
-  let lib = JSON.parse(localStorage.getItem('myLibrary')) || [];
+  let lib = getLibrary();
   const exists = lib.find(m => m.id === movie.id);
 
   if (exists) {
     lib = lib.filter(m => m.id !== movie.id);
     btn.textContent = 'Add to my library';
-    iziToast.info({ message: 'Removed from My Library', position: 'topRight' });
+    alert(`"${movie.title}" kütüphaneden çıkarıldı.`);
   } else {
-    lib.push(movie);
+    lib.push(movie); // ✅ tüm nesneyi ekliyoruz
     btn.textContent = 'Remove from my library';
-    iziToast.success({ message: 'Added to My Library', position: 'topRight' });
+    alert(`"${movie.title}" kütüphaneye eklendi.`);
   }
 
-  localStorage.setItem('myLibrary', JSON.stringify(lib));
-}
-
-async function fetchUpcomingMovies(page = 1) {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const lastDay = new Date(year, now.getMonth() + 1, 0).getDate();
-  const start = `${year}-${month}-01`;
-  const end = `${year}-${month}-${lastDay}`;
-
-  const res = await axios.get(`${BASE_URL}/discover/movie`, {
-    params: {
-      api_key: API_KEY,
-      language: LANGUAGE,
-      sort_by: 'popularity.desc',
-      primary_release_date_gte: start,
-      primary_release_date_lte: end,
-      page,
-    },
-  });
-
-  return res.data;
-}
-
-async function fetchGenres() {
-  const res = await axios.get(`${BASE_URL}/genre/movie/list`, {
-    params: { api_key: API_KEY, language: LANGUAGE },
-  });
-  return res.data;
+  localStorage.setItem('library', JSON.stringify(lib));
 }
 
 function buildHTML(movie, genreNames) {
@@ -113,8 +84,11 @@ function buildHTML(movie, genreNames) {
 }
 
 export async function renderUpcoming() {
-  console.log('🚀 renderUpcoming çağrıldı');
   const section = document.getElementById('upcoming');
+  if (!section) {
+    alert('⚠️ upcoming bölümü bulunamadı.');
+    return;
+  }
 
   try {
     if (cachedUpcoming.length === 0) {
@@ -126,7 +100,7 @@ export async function renderUpcoming() {
     const genresMap = {};
     genresData.genres.forEach(g => (genresMap[g.id] = g.name));
 
-    const library = JSON.parse(localStorage.getItem('myLibrary')) || [];
+    const library = getLibrary();
 
     let movie;
     while (cachedUpcoming.length > 0) {
@@ -141,10 +115,7 @@ export async function renderUpcoming() {
 
     if (!movie) {
       section.innerHTML = `<p style="text-align:center">No more upcoming movies available.</p>`;
-      iziToast.warning({
-        message: 'No more unique movies to show.',
-        position: 'topRight',
-      });
+      alert('⚠️ Gösterilecek benzersiz bir film kalmadı.');
       return;
     }
 
@@ -156,14 +127,13 @@ export async function renderUpcoming() {
     section.innerHTML = buildHTML(movie, genreNames);
 
     const btn = section.querySelector('#library-btn');
-    if (isInLibrary(movie.id)) btn.textContent = 'Remove from my library';
+    if (isInLibrary(movie.id)) {
+      btn.textContent = 'Remove from my library';
+    }
 
     btn.addEventListener('click', () => toggleLibrary(movie, btn));
   } catch (error) {
-    console.error('Error loading upcoming movie:', error);
-    iziToast.error({
-      message: 'Failed to load upcoming movie',
-      position: 'topRight',
-    });
+    console.error('❌ Yaklaşan film yüklenemedi:', error);
+    alert('Bir hata oluştu. Film yüklenemedi.');
   }
 }

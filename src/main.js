@@ -1,21 +1,6 @@
-// Stil ve bağımlılıkları
-import 'izitoast/dist/css/iziToast.min.css';
-
-// Sayfa bölümleri
 import { renderUpcoming } from './js/upcoming.js';
-import { setupHeroEvents } from './js/catalog-hero.js';
-import './js/library.js'; // sadece çalıştırmak için import ediliyor
-
-// Global işlevsellik
-import './js/header.js';
 import { initFooterModal } from './js/footer.js';
-import './js/hero.js';
-import './js/library-hero.js';
-import './js/trends.js';
-import './js/loader.js';
-import './js/scroll-up.js';
 
-// 🔄 HTML <load src="..."> etiketlerini parçalarla değiştir
 async function loadPartials() {
   const loads = document.querySelectorAll('load');
 
@@ -39,36 +24,25 @@ async function loadPartials() {
   }
 }
 
-// ✅ Partial'lar yüklendikten sonra her bölümü başlat
-loadPartials().then(async () => {
+// ✅ Yüklemeler tamamlandıktan sonra çalışacak
+(async () => {
+  await loadPartials();
+
+  // DOM'un güncellenmesini beklemek için küçük bir gecikme
+  await new Promise(resolve => requestAnimationFrame(resolve));
+
   try {
-    // CATALOG HERO bölümü varsa başlat
-    const heroSection = document.querySelector('.catalog-hero');
-    if (heroSection) {
-      setupHeroEvents();
-    }
-
-    // CATALOG bölümü varsa modülü dinamik olarak içe aktar ve başlat
-    const catalogSection = document.getElementById('catalog');
-    if (catalogSection) {
-      const { initCatalog } = await import('./js/catalog.js');
-      if (typeof initCatalog === 'function') {
-        initCatalog();
-      }
-    }
-
-    // UPCOMING bölümü varsa başlat
     const upcomingSection = document.getElementById('upcoming');
     if (upcomingSection) {
+      console.log('📦 #upcoming bulundu, render başlıyor');
       renderUpcoming();
+    } else {
+      console.warn("⛔️ #upcoming DOM'da bulunamadı");
     }
 
-    // FOOTER varsa modal'ı başlat
     const footerEl = document.getElementById('footer');
-    if (footerEl) {
-      initFooterModal();
-    }
+    if (footerEl) initFooterModal();
   } catch (error) {
     console.error('Bölümler başlatılırken hata oluştu:', error);
   }
-});
+})();

@@ -1,5 +1,5 @@
-export const API_KEY = '2609725f661288e9b08bc0d62455b671';
-export const BASE_URL = 'https://api.themoviedb.org/3';
+const API_KEY = '2609725f661288e9b08bc0d62455b671';
+const BASE_URL = 'https://api.themoviedb.org/3';
 
 // Tüm filmler
 export async function fetchPopularMovies(page = 1) {
@@ -51,10 +51,8 @@ export async function searchMovies(query, year = '') {
   return await res.json();
 }
 
-// Tür listesini getirme
+// Tür listesini getir
 export async function fetchGenres() {
-  const res = await axios.get(`${BASE_URL}/genre/movie/list`, {
-    params: { api_key: API_KEY, language: LANGUAGE },
-  });
-  return res.data;
+  const res = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+  return await res.json();
 }
