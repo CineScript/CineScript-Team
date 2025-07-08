@@ -210,9 +210,13 @@
   cursor: pointer;
   box-sizing: border-box;
   overflow: hidden;
-  border: 1px solid red;
-  
+  border: 1px solid var(--accent, #ff6b08);
   margin-top: 24px;
+}
+
+.movie-popup-add-btn:hover {
+  background-color: white;
+  color: var(--accent, #ff6b08);
 }
 
 /* remove stilleri */

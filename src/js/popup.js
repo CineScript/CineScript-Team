@@ -9,6 +9,9 @@ import {
   fetchMovieVideos
 } from "../api/tmdbApi.js";
 
+import closeSvg from '../img/svg/close.svg';
+import closeHoverSvg from '../img/svg/close-hover.svg';
+
 let genreMap = null;
 
 async function ensureGenreMap() {
