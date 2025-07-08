@@ -1,6 +1,6 @@
 import { fetchDailyTrending } from '../api/tmdbApi.js';
 
-export async function setHeroBackground() {
+async function setHeroBackground() {
   const heroElement = document.querySelector('.library-hero-bg');
   if (!heroElement) return;
 
@@ -25,3 +25,5 @@ export async function setHeroBackground() {
     // CSS fallback devrede kalır
   }
 }
+
+setHeroBackground();
