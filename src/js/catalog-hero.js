@@ -1,11 +1,13 @@
 import { fetchDailyTrending, fetchMovieVideos } from '../api/tmdbApi.js';
 import { openTrailerModal } from './modal-trailer.js';
 
+const heroSection = document.querySelector('.catalog-hero');
 const titleEl = document.querySelector('.catalog-hero-title');
 const overviewEl = document.querySelector('.catalog-hero-overview');
+const ratingEl = document.querySelector('.catalog-hero-rating');
 const trailerBtn = document.querySelector('.catalog-hero-btn.trailer');
 const detailsBtn = document.querySelector('.catalog-hero-btn.details');
-const heroSection = document.querySelector('.catalog-hero');
+
 let currentMovieId = null;
 
 async function renderRandomHeroMovie() {
@@ -13,29 +15,38 @@ async function renderRandomHeroMovie() {
     const data = await fetchDailyTrending();
     const movies = data.results;
 
-    if (!movies || movies.length === 0) {
-      console.error('Trend filmler bulunamadı.');
-      return;
-    }
+    if (!movies || movies.length === 0) return;
 
     const randomMovie = movies[Math.floor(Math.random() * movies.length)];
     currentMovieId = randomMovie.id;
 
-    const posterPath = randomMovie.backdrop_path || randomMovie.poster_path;
+    // Arka plan görseli
+    const backdrop = randomMovie.backdrop_path || randomMovie.poster_path;
+    const bgUrl = backdrop
+      ? `https://image.tmdb.org/t/p/original${backdrop}`
+      : '';
 
-    if (posterPath) {
-      const bgUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
+    if (bgUrl) {
       heroSection.style.backgroundImage = `url(${bgUrl})`;
-    } else {
-      heroSection.style.backgroundColor = '#000';
     }
 
-    titleEl.textContent =
-      randomMovie.title || randomMovie.name || 'Film adı yok';
-    overviewEl.textContent = randomMovie.overview || 'Açıklama bulunamadı.';
-  } catch (error) {
-    console.error('Hero bölümü yüklenirken hata:', error);
+    titleEl.textContent = randomMovie.title || randomMovie.name || 'No title';
+    overviewEl.textContent = randomMovie.overview || 'No description available';
+
+    ratingEl.innerHTML = generateStars(randomMovie.vote_average);
+  } catch (err) {
+    console.error('Hero verisi alınamadı:', err);
   }
+}
+
+function generateStars(voteAverage) {
+  const fullStars = Math.floor(voteAverage / 2);
+  const halfStar = voteAverage % 2 >= 1 ? '½' : '';
+  return (
+    '★'.repeat(fullStars) +
+    (halfStar ? '★' : '') +
+    '☆'.repeat(5 - fullStars - (halfStar ? 1 : 0))
+  );
 }
 
 async function handleTrailerClick() {
@@ -43,30 +54,23 @@ async function handleTrailerClick() {
 
   try {
     const data = await fetchMovieVideos(currentMovieId);
-    const videos = data.results;
-
-    if (!videos || videos.length === 0) {
-      alert('Bu film için video bulunamadı.');
-      return;
-    }
-
-    const trailer = videos.find(
+    const trailer = data.results.find(
       v => v.type === 'Trailer' && v.site === 'YouTube'
     );
 
     if (trailer) {
       openTrailerModal(trailer.key);
     } else {
-      alert('Fragman bulunamadı.');
+      alert('Trailer not found.');
     }
-  } catch (error) {
-    console.error('Fragman yüklenirken hata:', error);
+  } catch (err) {
+    console.error('Trailer yüklenemedi:', err);
   }
 }
 
 trailerBtn.addEventListener('click', handleTrailerClick);
 detailsBtn.addEventListener('click', () => {
-  alert('More details tıklandı!');
+  alert('More details clicked!');
 });
 
 renderRandomHeroMovie();
