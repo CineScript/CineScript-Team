@@ -11,7 +11,7 @@ export async function deleteMoviePopup(movie, genreMap) {
   if (!template) {
     const isLocal = window.location.hostname === 'localhost';
     const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
-    const popupPath = isLocal ? '/partials/library-popup.html' : `/${repoName}/library-popup.html`;
+    const popupPath = isLocal ? '/partials/library-popup.html' : `/${repoName}/partials/library-popup.html`;
 
     try {
       const res = await fetch(popupPath);
