@@ -8,7 +8,6 @@ import {
   fetchMovieDetails,
   fetchMovieVideos
 } from "../api/tmdbApi.js";
-
 import closeSvg from '../img/svg/close.svg';
 import closeHoverSvg from '../img/svg/close-hover.svg';
 
@@ -151,33 +150,61 @@ async function showPopupFromTemplate(popupOverlay, movie) {
   }
 
   // Kapatma butonu
-const closeBtn = popupOverlay.querySelector('.movie-popup-close');
+  const closeBtn = popupOverlay.querySelector('.movie-popup-close');
 
-// Repo adını dinamik olarak alalım, böylece hem lokalde hem canlıda çalışır
-const isLocal = window.location.hostname === 'localhost';
-const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
-const basePath = isLocal ? '' : `/${repoName}`; // Canlıda "/CineScript-Team" gibi olacak
-
-closeBtn.addEventListener('mouseenter', () => {
-  // Canlıda: /CineScript-Team/img/svg/close-hover.svg
-  // Lokal: /img/svg/close-hover.svg
-  closeBtn.querySelector('img').src = `${basePath}/img/svg/close-hover.svg`;
-});
-
-closeBtn.addEventListener('mouseleave', () => {
-  // Canlıda: /CineScript-Team/img/svg/close.svg
-  // Lokal: /img/svg/close.svg
-  closeBtn.querySelector('img').src = `${basePath}/img/svg/close.svg`;
-});
-
-closeBtn.addEventListener('click', () => popupOverlay.remove());
-
-// Herhangi bir yere tıklanınca popup'ı kapat
-popupOverlay.addEventListener('mousedown', function(e) {
-  if (e.target === popupOverlay) {
-    popupOverlay.remove();
+  // Eğer butonun içinde img yoksa, dinamik olarak ekle
+  let closeImg = closeBtn.querySelector('img');
+  if (!closeImg) {
+    closeImg = document.createElement('img');
+    closeImg.alt = 'close';
+    closeImg.className = 'close-icon';
+    closeImg.width = 24;
+    closeImg.height = 24;
+    closeImg.style.width = '24px';
+    closeImg.style.height = '24px';
+    closeImg.src = closeSvg;
+    closeBtn.appendChild(closeImg);
   }
-});
+
+  // Repo adını dinamik olarak alalım, böylece hem lokalde hem canlıda çalışır
+  const isLocal = window.location.hostname === 'localhost';
+  const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
+  const basePath = isLocal ? '' : `/${repoName}`; // Canlıda "/CineScript-Team" gibi olacak
+
+  closeBtn.addEventListener('mouseenter', () => {
+    // Canlıda: /CineScript-Team/img/svg/close-hover.svg
+    // Lokal: /img/svg/close-hover.svg
+    closeBtn.querySelector('img').src = closeHoverSvg;
+  });
+
+  closeBtn.addEventListener('mouseleave', () => {
+    // Canlıda: /CineScript-Team/img/svg/close.svg
+    // Lokal: /img/svg/close.svg
+    closeBtn.querySelector('img').src = closeSvg;
+  });
+
+  closeBtn.addEventListener('click', () => popupOverlay.remove());
+
+  // Herhangi bir yere tıklanınca popup'ı kapat
+  popupOverlay.addEventListener('mousedown', function(e) {
+    if (e.target === popupOverlay) {
+      popupOverlay.remove();
+    }
+  });
   // Ekrana ekle
   document.body.appendChild(popupOverlay);
+
+  // Çarpı ikonunu DOM'a eklendikten sonra kesin olarak ekle
+  if (closeBtn) {
+    closeBtn.innerHTML = '';
+    const closeImg = document.createElement('img');
+    closeImg.alt = 'close';
+    closeImg.className = 'close-icon';
+    closeImg.width = 24;
+    closeImg.height = 24;
+    closeImg.style.width = '24px';
+    closeImg.style.height = '24px';
+    closeImg.src = closeSvg;
+    closeBtn.appendChild(closeImg);
+  }
 }
