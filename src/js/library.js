@@ -246,9 +246,9 @@ function createMovieCard(movie, genreMap) {
 // 8. YILDIZLAR
 // --------------------
 const ICON_PATHS = {
-  full: '/img/svg/star.svg',
-  half: '/img/svg/star-half.svg',
-  empty: '/img/svg/star-outline.svg',
+  full: '/svg/star.svg',
+  half: '../img/svg/star-half.svg',
+  empty: '../img/svg/star-outline.svg',
 };
 
 function getStarIcons(vote) {
