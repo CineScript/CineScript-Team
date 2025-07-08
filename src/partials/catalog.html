@@ -1,37 +1,50 @@
 <section class="catalog" id="catalog">
-
-  <section class="search-section">
+  <!-- Search Section -->
+  <div class="search-section">
     <form id="search-form" class="search-form">
-      <input
-        type="text"
-        placeholder="Search"
-        name="query"
-        id="search-input"
-        class="search-input"
-      />
+      <div class="search-wrapper">
+        <input
+          type="text"
+          placeholder="Search"
+          name="query"
+          id="search-input"
+          class="search-input"
+        />
+        <button
+          type="button"
+          id="clear-search"
+          class="clear-button"
+          title="Clear"
+        >
+          &times;
+        </button>
+      </div>
+
       <select id="year-select" class="year-select">
-      <option value="">Year</option>
+        <option value="">Year</option>
       </select>
-      
+
       <button class="search-button" aria-label="Search">
-  <img src="./img/svg/search-w.svg" alt="Search Icon" width="48" height="48" />
-</button>
-
+        <img
+          src="./img/svg/search-w.svg"
+          alt="Search Icon"
+          width="24"
+          height="24"
+        />
+      </button>
     </form>
-  </section>
+  </div>
 
-  <!-- Film Listesi -->
-  <section class="movie-list-section">
+  <!-- Movie List Section -->
+  <div class="movie-list-section">
     <ul id="movie-list" class="movie-list">
-      <!-- JS ile film kartları gelecek -->
+      <!-- JS will populate movies here -->
     </ul>
-    <p id="no-results" class="no-results-message" style="display: none;">
-      Aradığınız kriterlere uygun film bulunamadı.
+    <p id="no-results" class="no-results-message" style="display: none">
+      No results found.
     </p>
-  </section>
+  </div>
 
-  <!-- Sayfalama (şimdilik boş) -->
-  <section class="pagination-section" id="pagination"></section>
+  <!-- Pagination Section -->
+  <div class="pagination-section" id="pagination"></div>
 </section>
-
-<script type="module" src="./js/catalog.js"></script>
