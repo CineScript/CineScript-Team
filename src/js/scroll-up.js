@@ -14,10 +14,8 @@ function scrollFunction() {
     scrollUpBtn.style.display = 'block';
   } else {
     scrollUpBtn.style.display = 'none';
-    console.log('Scroll up button çalışmadı');
   }
 }
-
 scrollUpBtn.addEventListener('click', function () {
   window.scrollTo({
     top: 0,
