@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   librarygenreDisplay.addEventListener('click', () => {
     librarygenreOptions.classList.toggle('hidden');
   });
-Q
+
   loadMoreBtn.addEventListener('click', () => {
     renderMovies();
     updateLoadMoreButton();
