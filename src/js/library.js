@@ -278,6 +278,7 @@ function hideLoading() {
 // 10. DOM YÜKLENDİĞİNDE
 // -----------------------------
 document.addEventListener('DOMContentLoaded', () => {
+   console.log('Library JS çalışıyor'); // ✅ Buraya eklendi
   librarygenreDisplay.childNodes[0].nodeValue = 'Genre';
   loadLibrary();
 
