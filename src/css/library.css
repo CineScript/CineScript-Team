@@ -11,7 +11,6 @@
   margin-top: 20px;
 }
 
-
 .library-text {
   font-weight: 400;
   font-size: 20px;
@@ -21,18 +20,24 @@
   text-align: center;
 }
 
+.library-btn {
+  font-size: 12px;
+  width: 121px;
+}
 
 .library-btn:hover {
   background: var(--white-color);
   color: var(--orange-color);
 }
-.search{
+.search {
   background: var(--primary-linear-color);
 }
 .load-more-btn {
   background: var(--primary-linear-color);
   display: none;
-  margin: 20px auto; 
+  margin: 20px auto;
+  width: 106px;
+  height: 38px;
 }
 
 .library-loading {
@@ -41,33 +46,31 @@
   margin: 20px 0;
 }
 
-
 /* LIBRARY GENRE */
 .library-custom-select {
   position: relative;
   width: 173px;
   user-select: none;
   font-size: 14px;
-  
 }
 
 .library-selected-option {
   display: flex;
   justify-content: space-between;
-  padding: 15px 10px 10px 15px;   
+  padding: 15px 10px 10px 15px;
   cursor: pointer;
   color: var(--text-color);
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
-  border-radius:7px;
+  border-radius: 7px;
   font-size: 14px;
   height: 44px;
-  width: 173px;  
+  width: 173px;
 }
 
 .library-dropdown-icon {
   width: 16px;
-  height: 16px; 
+  height: 16px;
 }
 [data-theme='light'] .library-dropdown-icon {
   filter: brightness(0) invert(0);
@@ -85,7 +88,7 @@
   max-height: 200px;
   overflow-y: auto;
   border: 1px solid var(--border-color);
-  border-radius:7px;
+  border-radius: 7px;
 }
 
 /* Scrollbar’ı gizle (Chrome, Safari, Edge) */
@@ -93,7 +96,7 @@
   width: 0;
   height: 0;
 }
-.movie-popup-add-btn.removed:hover{
+.movie-popup-add-btn.removed:hover {
   color: var(--orange-color);
 }
 .library-genre-options {
@@ -104,8 +107,8 @@
 }
 
 .library-genre-options li {
-  font-size:14px;
-  padding: 15px 20px 10px 15px; 
+  font-size: 14px;
+  padding: 15px 20px 10px 15px;
   height: 44px;
   background-color: var(--secondary-black-color);
   color: var(--text-color);
@@ -122,7 +125,6 @@
 }
 
 /* LIBRARY GENRE END*/
-
 
 /* LIBRARY FILM LIST*/
 
@@ -159,7 +161,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease; 
+  transition: transform 0.4s ease;
   z-index: 0;
 }
 
@@ -214,7 +216,6 @@
   object-fit: contain;
 }
 
-
 /* Tablet ve üzeri */
 @media (min-width: 768px) {
   .library-film-list {
@@ -241,6 +242,12 @@
     height: 40px;
   }
 
+  .load-more-btn {
+    margin: 40px auto;
+    width: 115px;
+    height: 40px;
+  }
+
   .library-film-title {
     margin: 0 0 10px 0;
     font-size: 12px;
@@ -255,12 +262,12 @@
     height: 10px;
   }
 
-.library-selected-option {
-  width: 144px;  
-}
-.library-genre-options{
-  width: 144px ;
-}
+  .library-selected-option {
+    width: 144px;
+  }
+  .library-genre-options {
+    width: 144px;
+  }
 }
 
 /* Desktop */
@@ -285,6 +292,12 @@
     width: 158px;
     height: 52px;
   }
+
+  .load-more-btn {
+    width: 134px;
+    height: 52px;
+  }
+
   .library-film-info {
     font-size: 20px;
   }
@@ -302,16 +315,16 @@
     width: 16px;
     height: 15px;
   }
-  
-.library-selected-option {
-  width: 280px;  
-  height: 47px;
-  font-size: 16px;
-}
-.library-genre-options{
-  width: 280px ;
-}
-.library-genre-options li{
-  font-size: 16px;
-}
+
+  .library-selected-option {
+    width: 280px;
+    height: 47px;
+    font-size: 16px;
+  }
+  .library-genre-options {
+    width: 280px;
+  }
+  .library-genre-options li {
+    font-size: 16px;
+  }
 }
