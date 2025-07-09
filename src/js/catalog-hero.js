@@ -1,5 +1,6 @@
 import { fetchDailyTrending, fetchMovieVideos } from '../api/tmdbApi.js';
 import { openTrailerModal } from './modal-trailer.js';
+import { createMoviePopup } from './popup.js';
 
 const heroSection = document.querySelector('.catalog-hero');
 const titleEl = document.querySelector('.catalog-hero-title');
