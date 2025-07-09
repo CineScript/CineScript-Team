@@ -1,4 +1,4 @@
-import{f as s,c as u}from"./assets/catalog-B9rYyrsv.js";import"./assets/scroll-up-Clndop_d.js";const o=document.createElement("div");o.classList.add("trailer-modal","is-hidden");o.innerHTML=`
+import{f as s,c as u}from"./assets/catalog-Dy8ybqnI.js";import"./assets/scroll-up-Clndop_d.js";const o=document.createElement("div");o.classList.add("trailer-modal","is-hidden");o.innerHTML=`
   <div class="trailer-modal-backdrop">
     <div class="trailer-modal-content">
       <button class="trailer-modal-close" aria-label="Close modal">&times;</button>
