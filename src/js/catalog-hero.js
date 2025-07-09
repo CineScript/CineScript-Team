@@ -20,19 +20,17 @@ async function renderRandomHeroMovie() {
     const randomMovie = movies[Math.floor(Math.random() * movies.length)];
     currentMovieId = randomMovie.id;
 
-    // Arka plan görseli
     const backdrop = randomMovie.backdrop_path || randomMovie.poster_path;
     const bgUrl = backdrop
       ? `https://image.tmdb.org/t/p/original${backdrop}`
       : '';
 
     if (bgUrl) {
-      heroSection.style.backgroundImage = `url(${bgUrl})`;
+      heroSection.style.setProperty('--hero-bg', `url(${bgUrl})`);
     }
 
     titleEl.textContent = randomMovie.title || randomMovie.name || 'No title';
     overviewEl.textContent = randomMovie.overview || 'No description available';
-
     ratingEl.innerHTML = generateStars(randomMovie.vote_average);
   } catch (err) {
     console.error('Hero verisi alınamadı:', err);
