@@ -10,6 +10,7 @@ const trailerBtn = document.querySelector('.catalog-hero-btn.trailer');
 const detailsBtn = document.querySelector('.catalog-hero-btn.details');
 
 let currentMovieId = null;
+let currentMovieData = null;
 
 async function renderRandomHeroMovie() {
   try {
@@ -20,6 +21,7 @@ async function renderRandomHeroMovie() {
 
     const randomMovie = movies[Math.floor(Math.random() * movies.length)];
     currentMovieId = randomMovie.id;
+    currentMovieData = randomMovie;
 
     const backdrop = randomMovie.backdrop_path || randomMovie.poster_path;
     const bgUrl = backdrop
@@ -68,8 +70,11 @@ async function handleTrailerClick() {
 }
 
 trailerBtn.addEventListener('click', handleTrailerClick);
+
 detailsBtn.addEventListener('click', () => {
-  alert('More details clicked!');
+  if (currentMovieData) {
+    createMoviePopup(currentMovieData);
+  }
 });
 
 renderRandomHeroMovie();
