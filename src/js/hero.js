@@ -61,7 +61,7 @@ export async function showHeroBasedOnAPI() {
 
       for (let i = 0; i < fullStars; i++) {
         const img = document.createElement('img');
-        img.src = '/svg/star.svg';
+        img.src = './svg/star.svg';
         img.alt = 'full star';
         img.classList.add('star-icon');
         starContainer.appendChild(img);
@@ -69,7 +69,7 @@ export async function showHeroBasedOnAPI() {
 
       if (halfStar) {
         const img = document.createElement('img');
-        img.src = '/svg/star-half.svg';
+        img.src = './svg/star-half.svg';
         img.alt = 'half star';
         img.classList.add('star-icon');
         starContainer.appendChild(img);
@@ -77,7 +77,7 @@ export async function showHeroBasedOnAPI() {
 
       for (let i = 0; i < emptyStars; i++) {
         const img = document.createElement('img');
-        img.src = '/svg/star-outline.svg';
+        img.src = './svg/star-outline.svg';
         img.alt = 'empty star';
         img.classList.add('star-icon');
         starContainer.appendChild(img);
