@@ -37,11 +37,13 @@
 
 .library-hero-title {
   text-align: start;
+  color: var(--white-color);
 }
 
 .library-hero-subtitle {
   text-align: start;
   font-size: 14px;
+  color: var(--white-color);
 }
 
 /*Tablet Cihaz Stilleri*/

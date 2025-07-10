@@ -1,4 +1,7 @@
-import { fetchMovieDetails, fetchGenres as fetchGenresApi } from '../api/tmdbApi.js';
+import {
+  fetchMovieDetails,
+  fetchGenres as fetchGenresApi,
+} from '../api/tmdbApi.js';
 import { deleteMoviePopup } from './library-popup.js';
 
 // ----------------------------
@@ -112,7 +115,10 @@ async function populateGenres(genreIdsToShow, selectedGenreId = '') {
     }
 
     allGenres.forEach(genre => {
-      if (genreIdsToShow.includes(genre.id) && genre.id !== Number(selectedGenreId)) {
+      if (
+        genreIdsToShow.includes(genre.id) &&
+        genre.id !== Number(selectedGenreId)
+      ) {
         const li = document.createElement('li');
         li.textContent = genre.name;
         li.dataset.id = genre.id;
@@ -204,7 +210,8 @@ function renderMovies() {
 
 function updateLoadMoreButton() {
   if (!loadMoreBtn) return;
-  loadMoreBtn.style.display = currentIndex >= allMovies.length ? 'none' : 'block';
+  loadMoreBtn.style.display =
+    currentIndex >= allMovies.length ? 'none' : 'block';
 }
 
 // --------------------------
@@ -220,7 +227,8 @@ function createMovieCard(movie, genreMap) {
 
   const releaseYear = movie.release_date?.split('-')[0] || 'Bilinmiyor';
   const rating = movie.vote_average || 0;
-  const genreNames = movie.genres?.map(g => g.name).join(', ') || 'Tür bilinmiyor';
+  const genreNames =
+    movie.genres?.map(g => g.name).join(', ') || 'Tür bilinmiyor';
 
   const stars = getStarIcons(rating);
 
@@ -257,9 +265,15 @@ function getStarIcons(vote) {
   const emptyStars = 5 - fullStars - halfStar;
 
   return (
-    `<img class="star-icon full" src="${ICON_PATHS.full}" alt="star" />`.repeat(fullStars) +
-    `<img class="star-icon half" src="${ICON_PATHS.half}" alt="half star" />`.repeat(halfStar) +
-    `<img class="star-icon empty" src="${ICON_PATHS.empty}" alt="empty star" />`.repeat(emptyStars)
+    `<img class="star-icon full" src="${ICON_PATHS.full}" alt="star" />`.repeat(
+      fullStars
+    ) +
+    `<img class="star-icon half" src="${ICON_PATHS.half}" alt="half star" />`.repeat(
+      halfStar
+    ) +
+    `<img class="star-icon empty" src="${ICON_PATHS.empty}" alt="empty star" />`.repeat(
+      emptyStars
+    )
   );
 }
 
@@ -278,7 +292,7 @@ function hideLoading() {
 // 10. DOM YÜKLENDİĞİNDE
 // -----------------------------
 document.addEventListener('DOMContentLoaded', () => {
-   console.log('Library JS çalışıyor'); // ✅ Buraya eklendi
+  console.log('Library JS çalışıyor'); // ✅ Buraya eklendi
   librarygenreDisplay.childNodes[0].nodeValue = 'Genre';
   loadLibrary();
 
@@ -304,4 +318,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-

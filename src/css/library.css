@@ -1,6 +1,7 @@
 .library {
   padding: 40px 20px;
   color: var(--text-color);
+  flex-grow: 1;
 }
 
 .library-placeholder {
@@ -12,12 +13,12 @@
 }
 
 .library-text {
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.4em;
-  margin-bottom: 4px;
-  letter-spacing: 0;
+  width: 280px;
   text-align: center;
+}
+
+[data-theme='light'] .library-text {
+  color: var(--black-color);
 }
 
 .library-btn {
@@ -233,13 +234,31 @@
     object-fit: cover;
   }
   .library-text {
-    font-size: 24px;
-    line-height: 1.6em;
+    width: 438px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    margin: 0;
   }
+
+  .library-placeholder {
+    position: relative;
+
+    min-height: 350px;
+    width: 100%;
+  }
+
   .library-btn {
     font-size: 14px;
     width: 133px;
     height: 40px;
+    position: absolute;
+    top: calc(50% + 110px);
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .load-more-btn {
@@ -283,6 +302,7 @@
     object-fit: cover;
   }
   .library-text {
+    width: 800px;
     font-size: 32px;
     line-height: 1.6em;
   }
@@ -291,6 +311,7 @@
     font-size: 16px;
     width: 158px;
     height: 52px;
+    top: calc(50% + 150px);
   }
 
   .load-more-btn {
