@@ -1,15 +1,15 @@
-import{a as M,b as B,c as k,d as C,e as _}from"./assets/catalog-BssJFwW6.js";import{b as g}from"./assets/vendor-PRc6rJ_y.js";import"./assets/main-B2r4-hU2.js";function x(o){document.querySelectorAll(".basicLightbox").forEach(e=>e.remove());const t=g.create(o);t.show();const n=t.element();n.addEventListener("click",e=>{e.target===n&&t.close()},{once:!0})}async function T(){const o=document.getElementById("hero1"),t=document.getElementById("hero2");try{const e=(await M()).results[0],i=await B(e.id);if(i.results.some(r=>r.type==="Trailer"&&r.site==="YouTube")&&e.backdrop_path){t.style.backgroundImage=`url(https://image.tmdb.org/t/p/original${e.backdrop_path})`,t.style.backgroundSize="cover",t.style.backgroundPosition="center",t.style.backgroundRepeat="no-repeat",o.style.display="none",t.style.display="block",t.querySelector(".hero2-title").textContent=e.title,t.querySelector(".hero2-description").textContent=e.overview||"No description available.";const r=e.vote_average,c=Math.floor(r/2),u=r%2>=1?1:0,m=5-c-u,d=t.querySelector(".hero2-stars");d.innerHTML="";for(let s=0;s<c;s++){const a=document.createElement("img");a.src="./svg/star.svg",a.alt="full star",a.classList.add("star-icon"),d.appendChild(a)}if(u){const s=document.createElement("img");s.src="./svg/star-half.svg",s.alt="half star",s.classList.add("star-icon"),d.appendChild(s)}for(let s=0;s<m;s++){const a=document.createElement("img");a.src="./svg/star-outline.svg",a.alt="empty star",a.classList.add("star-icon"),d.appendChild(a)}const h=document.getElementById("watch-trailer-btn");h&&h.addEventListener("click",async()=>{try{const s=i.results.find(a=>a.type==="Trailer"&&a.site==="YouTube");if(s){const a=s.key;x(`
+import{a as E,b as B,c as $,d as I,e as O,g as U}from"./assets/catalog-DMS-Ny11.js";import{b as k}from"./assets/vendor-PRc6rJ_y.js";import"./assets/main-DvkLlPDN.js";function A(s){document.querySelectorAll(".basicLightbox").forEach(t=>t.remove());const r=k.create(s);r.show();const c=r.element();c.addEventListener("click",t=>{t.target===c&&r.close()},{once:!0})}async function q(){const s=document.getElementById("hero1"),r=document.getElementById("hero2");try{const t=(await E()).results[0],g=await B(t.id);if(g.results.some(n=>n.type==="Trailer"&&n.site==="YouTube")&&t.backdrop_path){r.style.backgroundImage=`url(https://image.tmdb.org/t/p/original${t.backdrop_path})`,r.style.backgroundSize="cover",r.style.backgroundPosition="center",r.style.backgroundRepeat="no-repeat",s.style.display="none",r.style.display="block",r.querySelector(".hero2-title").textContent=t.title,r.querySelector(".hero2-description").textContent=t.overview||"No description available.";const n=t.vote_average,u=Math.floor(n/2),v=n%2>=1?1:0,e=5-u-v,o=r.querySelector(".hero2-stars");o.innerHTML="";for(let a=0;a<u;a++){const l=document.createElement("img");l.src="./svg/star.svg",l.alt="full star",l.classList.add("star-icon"),o.appendChild(l)}if(v){const a=document.createElement("img");a.src="./svg/star-half.svg",a.alt="half star",a.classList.add("star-icon"),o.appendChild(a)}for(let a=0;a<e;a++){const l=document.createElement("img");l.src="./svg/star-outline.svg",l.alt="empty star",l.classList.add("star-icon"),o.appendChild(l)}const i=document.getElementById("watch-trailer-btn");i&&i.addEventListener("click",async()=>{try{const a=g.results.find(l=>l.type==="Trailer"&&l.site==="YouTube");if(a){const l=a.key;A(`
                 <div class="popup-video-wrapper">
                   <iframe
                     width="800"
                     height="450"
-                    src="https://www.youtube.com/embed/${a}?autoplay=1"
+                    src="https://www.youtube.com/embed/${l}?autoplay=1"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                   ></iframe>
                 </div>
-              `)}}catch(s){console.error("Video açılırken hata:",s)}});const w=t.querySelector("#more-details-btn");w&&w.addEventListener("click",async()=>{try{const a=(await k()).genres.reduce((p,v)=>(p[v.id]=v.name,p),{}),L=e.poster_path?`https://image.tmdb.org/t/p/w500${e.poster_path}`:"https://via.placeholder.com/500x750?text=No+Image",E=e.genre_ids.map(p=>a[p]).join(", ");g.create(`
+              `)}}catch(a){console.error("Video açılırken hata:",a)}});const m=r.querySelector("#more-details-btn");m&&m.addEventListener("click",async()=>{try{const l=(await $()).genres.reduce((d,h)=>(d[h.id]=h.name,d),{}),b=t.poster_path?`https://image.tmdb.org/t/p/w500${t.poster_path}`:"https://via.placeholder.com/500x750?text=No+Image",y=t.genre_ids.map(d=>l[d]).join(", ");k.create(`
               <div class="movie-modal">
                 <button class="popup-close-btn" aria-label="Close">
                   <svg class="popup-close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -18,18 +18,18 @@ import{a as M,b as B,c as k,d as C,e as _}from"./assets/catalog-BssJFwW6.js";imp
                   </svg>
                 </button>
 
-                <img src="${L}" class="modal-poster" alt="${e.title}">
+                <img src="${b}" class="modal-poster" alt="${t.title}">
                 <div class="modal-details">
-                  <h2>${e.title}</h2>
-                  <p><strong>Vote / Votes:</strong> ${e.vote_average} / ${e.vote_count}</p>
-                  <p><strong>Popularity:</strong> ${e.popularity}</p>
-                  <p><strong>Genre:</strong> ${E}</p>
+                  <h2>${t.title}</h2>
+                  <p><strong>Vote / Votes:</strong> ${t.vote_average} / ${t.vote_count}</p>
+                  <p><strong>Popularity:</strong> ${t.popularity}</p>
+                  <p><strong>Genre:</strong> ${y}</p>
                   <h3>ABOUT</h3>
-                  <p>${e.overview}</p>
+                  <p>${t.overview}</p>
                   <button class="add-to-library">Add to Library</button>
                 </div>
               </div>
-              `,{onShow:p=>{p.element().querySelector(".popup-close-btn").addEventListener("click",()=>p.close())}}).show()}catch(s){console.error("Detay popup gösterilemedi:",s)}})}else o.style.display="block",t.style.display="none"}catch(n){console.error("Hata oluştu:",n),o.style.display="block",t.style.display="none"}}document.addEventListener("DOMContentLoaded",()=>{T();const o=document.querySelector("#hero1 .hero-button");o&&o.addEventListener("click",()=>{const e=`
+              `,{onShow:d=>{d.element().querySelector(".popup-close-btn").addEventListener("click",()=>d.close())}}).show()}catch(a){console.error("Detay popup gösterilemedi:",a)}})}else s.style.display="block",r.style.display="none"}catch(c){console.error("Hata oluştu:",c),s.style.display="block",r.style.display="none"}}document.addEventListener("DOMContentLoaded",()=>{q();const s=document.querySelector("#hero1 .hero-button");s&&s.addEventListener("click",()=>{const t=`
         <div class="popup-wrapper">
           <button class="popup-close-btn" aria-label="Close">
             <svg class="popup-close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -44,18 +44,18 @@ import{a as M,b as B,c as k,d as C,e as _}from"./assets/catalog-BssJFwW6.js";imp
           </p>
           <img src="${document.documentElement.getAttribute("data-theme")==="dark"?"./img/camera-dark.png":"./img/camera-light.png"}" alt="Camera icon" class="popup-img" />
         </div>
-      `;g.create(e,{onShow:l=>{l.element().querySelector(".popup-close-btn").addEventListener("click",()=>l.close())}}).show()})});const b=document.querySelector(".weekly-gallery"),I=document.querySelector(".weekly-see-all");let f=[],y=!1;function S(){const o=window.innerWidth;return o<768?1:(o<1280,3)}function q(o){const t=Math.floor(o/2),n=o%2>=1,e=5-t-(n?1:0),i=[];for(let l=0;l<t;l++)i.push('<img src="./public/svg/star.svg" alt="star" />');n&&i.push('<img src="./public/svg/star-half.svg" alt="half star" />');for(let l=0;l<e;l++)i.push('<img src="./public/svg/star-outline.svg" alt="empty star" />');return i.join("")}async function $(o=S()){try{const[t,n]=await Promise.all([_(),k()]);f=t.results;const e=n.genres.reduce((r,c)=>(r[c.id]=c.name,r),{}),l=f.slice(0,o).map(r=>{const c=r.poster_path?`https://image.tmdb.org/t/p/w500${r.poster_path}`:"https://via.placeholder.com/500x750?text=No+Image",u=r.genre_ids.map(h=>e[h]).slice(0,1).join(", "),m=r.release_date?r.release_date.slice(0,4):"N/A",d=q(r.vote_average);return`
-        <li class="weekly-card" data-id="${r.id}">
+      `;k.create(t,{onShow:p=>{p.element().querySelector(".popup-close-btn").addEventListener("click",()=>p.close())}}).show()})});const M=document.querySelector(".weekly-gallery"),H=document.querySelector(".weekly-see-all");let S=[],L=!1;function x(){const s=window.innerWidth;return s<768?1:(s<1280,3)}function N(s){const r=Math.floor(s/2),c=s%2>=1,t=5-r-(c?1:0),g=[];for(let p=0;p<r;p++)g.push('<img src="./public/svg/star.svg" alt="star" />');c&&g.push('<img src="./public/svg/star-half.svg" alt="half star" />');for(let p=0;p<t;p++)g.push('<img src="./public/svg/star-outline.svg" alt="empty star" />');return g.join("")}async function D(s=x()){try{const[r,c]=await Promise.all([O(),$()]);S=r.results;const t=c.genres.reduce((n,u)=>(n[u.id]=u.name,n),{}),p=S.slice(0,s).map(n=>{const u=n.poster_path?`https://image.tmdb.org/t/p/w500${n.poster_path}`:"https://via.placeholder.com/500x750?text=No+Image",v=n.genre_ids.map(i=>t[i]).slice(0,1).join(", "),e=n.release_date?n.release_date.slice(0,4):"N/A",o=N(n.vote_average);return`
+        <li class="weekly-card" data-id="${n.id}">
           <div class="poster-wrapper">
-            <img class="card-img" src="${c}" alt="${r.title}" />
+            <img class="card-img" src="${u}" alt="${n.title}" />
             <div class="card-overlay">
-              <h3 class="card-title">${r.title.toUpperCase()}</h3>
-              <p class="card-info">${u} | ${m}</p>
-              <div class="card-rating">${d}</div>
+              <h3 class="card-title">${n.title.toUpperCase()}</h3>
+              <p class="card-info">${v} | ${e}</p>
+              <div class="card-rating">${o}</div>
             </div>
           </div>
         </li>
-        `}).join("");b.innerHTML=l}catch(t){console.error("Weekly trends fetch error:",t),b.innerHTML="<p>Veriler alınamadı.</p>"}}I.addEventListener("click",()=>{y=!y;const o=y?f.length:S();$(o)});b.addEventListener("click",async o=>{const t=o.target.closest(".weekly-card");if(!t)return;const n=t.dataset.id;try{const e=await C(n),i=e.poster_path?`https://image.tmdb.org/t/p/w500${e.poster_path}`:"https://via.placeholder.com/500x750?text=No+Image",l=e.genres.map(c=>c.name).join(", ");g.create(`
+        `}).join("");M.innerHTML=p}catch(r){console.error("Weekly trends fetch error:",r),M.innerHTML="<p>Veriler alınamadı.</p>"}}H.addEventListener("click",()=>{L=!L;const s=L?S.length:x();D(s)});M.addEventListener("click",async s=>{const r=s.target.closest(".weekly-card");if(!r)return;const c=r.dataset.id;try{const t=await I(c),g=t.poster_path?`https://image.tmdb.org/t/p/w500${t.poster_path}`:"https://via.placeholder.com/500x750?text=No+Image",p=t.genres.map(u=>u.name).join(", ");k.create(`
         <div class="movie-modal">
     <button class="popup-close-btn" aria-label="Close">
       <svg class="popup-close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -64,16 +64,32 @@ import{a as M,b as B,c as k,d as C,e as _}from"./assets/catalog-BssJFwW6.js";imp
       </svg>
     </button>
 
-    <img src="${i}" class="modal-poster" alt="${e.title}">
+    <img src="${g}" class="modal-poster" alt="${t.title}">
     <div class="modal-details">
-      <h2>${e.title}</h2>
-      <p><strong>Vote / Votes:</strong> ${e.vote_average} / ${e.vote_count}</p>
-      <p><strong>Popularity:</strong> ${e.popularity}</p>
-      <p><strong>Genre:</strong> ${l}</p>
+      <h2>${t.title}</h2>
+      <p><strong>Vote / Votes:</strong> ${t.vote_average} / ${t.vote_count}</p>
+      <p><strong>Popularity:</strong> ${t.popularity}</p>
+      <p><strong>Genre:</strong> ${p}</p>
       <h3>ABOUT</h3>
-      <p>${e.overview}</p>
+      <p>${t.overview}</p>
       <button class="add-to-library">Add to Library</button>
     </div>
   </div>
-    `,{onShow:c=>{c.element().querySelector(".popup-close-btn").addEventListener("click",()=>c.close())}}).show()}catch(e){console.error("Popup açılırken hata:",e)}});$();
+    `,{onShow:u=>{u.element().querySelector(".popup-close-btn").addEventListener("click",()=>u.close())}}).show()}catch(t){console.error("Popup açılırken hata:",t)}});D();const w=document.querySelector(".upcoming-container");document.addEventListener("DOMContentLoaded",async()=>{let s=new Map;async function r(){try{const e=await $();e&&e.genres&&e.genres.forEach(o=>{s.set(o.id,o.name)})}catch(e){console.error("Türler çekilirken bir hata oluştu:",e)}}function c(e){return!e||e.length===0?"Unknown":e.map(o=>s.get(o)||"Unknown").join(", ")}function t(){const e=localStorage.getItem("library");return e?JSON.parse(e):[]}function g(e){localStorage.setItem("library",JSON.stringify(e))}function p(e,o){let i=t();const m=e.id;i.includes(m)?(i=i.filter(a=>a!==m),o.textContent="Add to my library",o.classList.remove("removed")):(i.push(m),o.textContent="Remove from my library",o.classList.add("removed")),g(i)}function n(e,o){t().includes(e.id)?(o.textContent="Remove from my library",o.classList.add("removed")):(o.textContent="Add to my library",o.classList.remove("removed"))}async function u(){await r();const e=new Date,o=e.getFullYear(),i=e.getMonth(),a=new Date(o,i,1).toISOString().split("T")[0],b=new Date(o,i+1,0).toISOString().split("T")[0];try{const y=await U(a,b);if(y&&y.results&&y.results.length>0){const f=y.results.filter(d=>{const h=new Date(d.release_date);return h.getFullYear()===o&&h.getMonth()===i});if(f.length>0){const d=Math.floor(Math.random()*f.length),h=f[d];v(h)}else w.innerHTML="<p>No movie released this month.</p>"}else w.innerHTML="<p>No upcoming movies found.</p>"}catch(y){console.error("Yaklaşan filmler çekilirken bir hata oluştu:",y),w.innerHTML="<p>There was an error loading movies. Please try again later.</p>"}}function v(e){w.innerHTML="";const o=document.createElement("div");o.classList.add("upcoming-item");const i=e.poster_path?`https://image.tmdb.org/t/p/w1280${e.poster_path}`:"https://via.placeholder.com/150x225?text=Poster+Yok",m=e.release_date;let a="Unknown";if(m){const h=new Date(m),T=String(h.getDate()).padStart(2,"0"),_=String(h.getMonth()+1).padStart(2,"0"),C=h.getFullYear();a=`${T}.${_}.${C}`}const l=e.vote_average?e.vote_average.toFixed(2):"Unknown",b=e.popularity?e.popularity.toFixed(2):"Unknown",y=e.overview||"There is no information about this movie.",f=c(e.genre_ids);o.innerHTML=`
+      <div class="poster-container">
+        <img src="${i}" alt="${e.title||e.original_title||"Movie Poster"}">
+      </div>
+      <div class="movie-details">
+        <h3>${e.title||e.original_title}</h3>
+        <div class="movie-details-info">
+         <p>Release date: <span class="release-date-text">${a}</span></p>
+
+         <p>Vote / Votes: <span class ="vote-text">${l}</span> / <span class="vote-text">10</span></p>
+         <p>Popularity: ${b}</p>
+         <p>Genre: ${f}</p>
+        </div>
+        <p class="about-text">ABOUT ${y}</p>
+        <button class="add-to-library-btn" data-movie-id="${e.id}">Add to my library</button>
+      </div>
+    `;const d=o.querySelector(".add-to-library-btn");n(e,d),d.addEventListener("click",h=>{p(e,d)}),w.appendChild(o)}u()});
 //# sourceMappingURL=index.js.map
