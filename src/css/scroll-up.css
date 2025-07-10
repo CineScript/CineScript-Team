@@ -8,11 +8,15 @@
   z-index: 99;
   border: none;
   outline: none;
-  background: var(--primary-linear-color);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 194, 38, 1) 0%,
+    rgba(248, 65, 25, 1) 100%
+  );
   color: var(--white-color);
   cursor: pointer;
   padding: 12px 16px;
-  border-radius: 5px;
+  border-radius: 50px;
   font-size: 16px;
   font-weight: var(--fw-bold);
 

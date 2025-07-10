@@ -1,45 +1,72 @@
 .catalog-hero {
   position: relative;
+  min-height: 600px;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  color: white;
+  overflow: hidden;
+  --hero-bg: none;
+}
+
+.catalog-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: 320px;
+  background-image: var(--hero-bg);
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  min-height: 500px;
-  color: #fff;
+  z-index: 0;
 }
 
 .catalog-hero-overlay {
-  background: rgba(0, 0, 0, 0.5); /* Görselin üstüne koyu filtre */
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   height: 100%;
-  padding: 40px 0;
+  width: 320px;
+  z-index: 1;
+
   display: flex;
   align-items: center;
+  padding-left: 40px;
+
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85) 30%,
+    rgba(0, 0, 0, 0.2) 80%,
+    transparent
+  );
 }
 
-.catalog-hero-container {
-  padding: 0 16px;
-}
-
-.catalog-hero-text {
+.catalog-hero-content {
   max-width: 600px;
+  padding: 40px 20px;
 }
 
 .catalog-hero-title {
-  font-size: 24px;
+  font-size: 48px;
   font-weight: bold;
   margin-bottom: 16px;
 }
 
 .catalog-hero-rating {
-  margin-bottom: 12px;
+  color: #ff9900;
+  font-size: 24px;
+  margin-bottom: 16px;
 }
 
 .catalog-hero-overview {
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 20px;
-  max-height: 7em;
-  overflow: hidden;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  color: #ddd;
 }
 
 .catalog-hero-buttons {
@@ -48,9 +75,9 @@
 }
 
 .catalog-hero-btn {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 30px;
-  font-size: 14px;
+  font-size: 16px;
   border: none;
   cursor: pointer;
   transition: 0.3s ease;
@@ -62,34 +89,52 @@
 }
 
 .catalog-hero-btn.details {
-  background: #fff;
-  color: #000;
+  background: transparent;
+  border: 1px solid white;
+  color: #fff;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
+  .catalog-hero::before {
+    width: 320px;
+  }
+
+  .catalog-hero-overlay {
+    width: 320px;
+    padding-left: 16px;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
   .catalog-hero-title {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .catalog-hero-overview {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .catalog-hero-btn {
-    font-size: 16px;
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .catalog-hero::before {
+    width: 768px;
   }
 
-  .catalog-hero {
-    min-height: 600px;
+  .catalog-hero-overlay {
+    width: 768px;
   }
 }
 
 @media (min-width: 1280px) {
-  .catalog-hero-title {
-    font-size: 48px;
+  .catalog-hero::before {
+    width: 1280px;
   }
 
-  .catalog-hero {
-    min-height: 720px;
+  .catalog-hero-overlay {
+    width: 1280px;
   }
 }

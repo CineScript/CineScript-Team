@@ -1,1 +1,52 @@
-<header class="header" id="header">header section</header>
+<header class="header" id="header">
+  <div class="container header-container">
+    <!-- Logo -->
+    <a href="index.html" class="logo">
+      <img
+        src="./img/svg/logo.svg"
+        alt="Cinemania logo"
+        width="48"
+        height="48"
+      />
+      <span>Cinemania</span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+      <!-- Menüde üstte logo -->
+      <a href="index.html" class="menu-logo">
+        <img
+          src="./img/svg/logo.svg"
+          alt="Cinemania logo"
+          width="30"
+          height="24"
+        />
+      </a>
+      <!-- Menü Bağlantıları -->
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="catalog.html" class="nav-link">Catalog</a></li>
+        <li><a href="mylibrary.html" class="nav-link">My Library</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mobil Menü Butonu (sadece yazı) -->
+    <button class="menu-button" id="menuToggleBtn" aria-label="Toggle menu">
+      MENU
+    </button>
+
+    <!-- Light/Dark Toggle -->
+    <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme">
+      <img src="./img/svg/dark.svg" alt="Theme Icon" class="theme-icon moon" />
+      <span class="theme-ball-wrapper"
+        ><img src="./img/svg/yay.svg" alt="Theme Ball" class="theme-ball"
+      /></span>
+      <img src="./img/svg/light.svg" alt="Sun" class="theme-icon sun" />
+    </button>
+  </div>
+</header>
+
+<!-- Menü açıldığında ekranı karartan overlay -->
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<script type="module" src="./js/header.js"></script>
