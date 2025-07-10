@@ -32,13 +32,13 @@ function createRatingStars(vote) {
   const stars = [];
 
   for (let i = 0; i < fullStars; i++) {
-    stars.push('<img src="./public/svg/star.svg" alt="star" />');
+    stars.push('<img src="./svg/star.svg" alt="star" />');
   }
   if (hasHalfStar) {
-    stars.push('<img src="./public/svg/star-half.svg" alt="half star" />');
+    stars.push('<img src="./svg/star-half.svg" alt="half star" />');
   }
   for (let i = 0; i < emptyStars; i++) {
-    stars.push('<img src="./public/svg/star-outline.svg" alt="empty star" />');
+    stars.push('<img src="./svg/star-outline.svg" alt="empty star" />');
   }
 
   return stars.join('');
