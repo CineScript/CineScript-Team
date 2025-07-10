@@ -1,6 +1,10 @@
 import axios from 'axios';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import {
+  toggleLibraryButton,
+  initializeLibraryButton,
+} from './libraryManager.js'; // ✅ Kütüphane işlemleri
 
 import {
   fetchPopularMovies,
@@ -32,7 +36,8 @@ export async function showHeroBasedOnAPI() {
 
   try {
     const popularData = await fetchPopularMovies();
-    const firstMovie = popularData.results[0];
+    const randomIndex = Math.floor(Math.random() * popularData.results.length);
+    const firstMovie = popularData.results[randomIndex];
     const videoData = await fetchMovieVideos(firstMovie.id);
 
     const hasTrailer = videoData.results.some(
@@ -159,6 +164,15 @@ export async function showHeroBasedOnAPI() {
                     .element()
                     .querySelector('.popup-close-btn');
                   closeBtn.addEventListener('click', () => instance.close());
+
+                  // ✅ Buton aktifliği kontrolü ve toggle işlemi
+                  const addBtn = instance
+                    .element()
+                    .querySelector('.add-to-library');
+                  initializeLibraryButton(firstMovie, addBtn);
+                  addBtn.addEventListener('click', () => {
+                    toggleLibraryButton(firstMovie, addBtn);
+                  });
                 },
               }
             );

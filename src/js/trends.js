@@ -8,8 +8,14 @@ import {
   fetchMovieDetails,
   fetchMovieVideos,
 } from '../api/tmdbApi.js';
+
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+
+import {
+  toggleLibraryButton,
+  initializeLibraryButton,
+} from './libraryManager.js'; // ✅ Yeni eklendi
 
 const gallery = document.querySelector('.weekly-gallery');
 const seeAllBtn = document.querySelector('.weekly-see-all');
@@ -119,33 +125,41 @@ gallery.addEventListener('click', async e => {
 
     const popup = basicLightbox.create(
       `
-        <div class="movie-modal">
-    <button class="popup-close-btn" aria-label="Close">
-      <svg class="popup-close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M6 6L18 18" stroke="currentColor" stroke-width="2"/>
-        <path d="M6 18L18 6" stroke="currentColor" stroke-width="2"/>
-      </svg>
-    </button>
+      <div class="movie-modal">
+        <button class="popup-close-btn" aria-label="Close">
+          <svg class="popup-close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2"/>
+            <path d="M6 18L18 6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
 
-    <img src="${posterUrl}" class="modal-poster" alt="${movie.title}">
-    <div class="modal-details">
-      <h2>${movie.title}</h2>
-      <p><strong>Vote / Votes:</strong> ${movie.vote_average} / ${movie.vote_count}</p>
-      <p><strong>Popularity:</strong> ${movie.popularity}</p>
-      <p><strong>Genre:</strong> ${genres}</p>
-      <h3>ABOUT</h3>
-      <p>${movie.overview}</p>
-      <button class="add-to-library">Add to Library</button>
-    </div>
-  </div>
-    `,
+        <img src="${posterUrl}" class="modal-poster" alt="${movie.title}">
+        <div class="modal-details">
+          <h2>${movie.title}</h2>
+          <p><strong>Vote / Votes:</strong> ${movie.vote_average} / ${movie.vote_count}</p>
+          <p><strong>Popularity:</strong> ${movie.popularity}</p>
+          <p><strong>Genre:</strong> ${genres}</p>
+          <h3>ABOUT</h3>
+          <p>${movie.overview}</p>
+          <button class="add-to-library">Add to Library</button>
+        </div>
+      </div>
+      `,
       {
         onShow: instance => {
           const closeBtn = instance.element().querySelector('.popup-close-btn');
           closeBtn.addEventListener('click', () => instance.close());
+
+          // ✅ Library butonu
+          const addBtn = instance.element().querySelector('.add-to-library');
+          initializeLibraryButton(movie, addBtn);
+          addBtn.addEventListener('click', () => {
+            toggleLibraryButton(movie, addBtn);
+          });
         },
       }
     );
+
     popup.show();
   } catch (err) {
     console.error('Popup açılırken hata:', err);
