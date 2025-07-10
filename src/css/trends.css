@@ -1,7 +1,8 @@
 .weekly-section {
   width: 100%;
-  max-width: 320px;
-  margin: 40px auto 0;
+  max-width: 280px;
+  padding: 0;
+  margin: 20px auto 0;
 }
 
 [data-theme='light'] .weekly-header h2 {
@@ -12,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 316px;
+  width: 280px;
   margin: 0 auto;
   margin-top: 40px;
 }
@@ -195,6 +196,8 @@ h2 {
 
 .add-to-library {
   margin-top: 8px;
+  width: 140px;
+  height: 38px;
   align-self: flex-start;
   padding: 6px 16px;
   border: 1px solid #f87719;
@@ -271,9 +274,38 @@ h2 {
   color: var(--orange-color);
 }
 
+/* Ortak stil - boyut, font vs. */
+.remove-from-library {
+  width: 176px;
+  height: 38px;
+  margin-top: 8px;
+  align-self: flex-start;
+  padding: 3px 16px;
+  color: #f87719;
+  font-weight: 500;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  font-size: 13px;
+  border: linear-gradient(90deg, #ffc226, #f84119);
+  background-color: transparent;
+}
+
+/* Light Mode: Add & Remove */
+[data-theme='light'] {
+  background-color: var(--button-bg-light);
+  color: #000;
+}
+
+.remove-from-library:hover {
+  border: linear-gradient(90deg, #ffc226, #f84119);
+  background-color: #fff;
+  color: #f87719;
+}
+
 @media (min-width: 768px) {
   .weekly-section {
-    width: 768px;
+    max-width: 704px;
     margin: 0 auto;
     padding: 0;
   }
@@ -285,7 +317,6 @@ h2 {
   .weekly-header {
     margin: 0 auto;
     margin-top: 52px;
-    width: 768px;
   }
 
   .weekly-see-all {
@@ -308,7 +339,6 @@ h2 {
     height: 100%;
   }
   .weekly-card img {
-    width: 768px;
     height: 100%;
     position: relative;
     overflow: hidden;
@@ -392,7 +422,6 @@ h2 {
 
   .weekly-section,
   .weekly-header {
-    max-width: 768px;
     width: 100%;
     margin: 52px auto 0;
   }
@@ -487,7 +516,7 @@ h2 {
 
 @media (min-width: 1280px) {
   .weekly-section {
-    width: 1280px;
+    width: 1215px;
     max-width: 100%;
     height: auto;
     margin: 0 auto;
@@ -502,7 +531,7 @@ h2 {
     border-radius: 5px;
   }
   .weekly-header {
-    width: 1280px;
+    width: 1176px;
     max-width: 100%;
   }
 
@@ -646,7 +675,7 @@ h2 {
     padding: 10px 20px;
     font-size: 14px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    outline: none;
   }
 
   .add-to-library:hover {
@@ -687,5 +716,33 @@ h2 {
   /* Hover durumunda sadece ikon (svg) rengi değişsin */
   .popup-close-btn:hover .popup-close-icon {
     color: var(--orange-color);
+  }
+
+  .remove-from-library {
+    width: 176px;
+    height: 38px;
+    margin-top: 24px;
+    align-self: flex-start;
+    padding: 3px 16px;
+    color: #f87719;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    font-size: 13px;
+    border: linear-gradient(90deg, #ffc226, #f84119);
+    background-color: transparent;
+  }
+
+  /* Light Mode: Add & Remove */
+  [data-theme='light'] {
+    background-color: var(--button-bg-light);
+    color: #000;
+  }
+
+  .remove-from-library:hover {
+    border: linear-gradient(90deg, #ffc226, #f84119);
+    background-color: #fff;
+    color: #f87719;
   }
 }
