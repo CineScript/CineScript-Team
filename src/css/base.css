@@ -10,7 +10,7 @@
   --fw-bold: 700;
   --fw-extrabold: 800;
   --fw-black: 900;
- 
+
   /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
   font-family: 'Roboto', sans-serif;
   font-weight: var(--fw-regular);

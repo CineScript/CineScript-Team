@@ -62,6 +62,25 @@ function updateButtonState(movie, button) {
   }
 }
 
+// YILDIZLAR İÇİN SVG DOSYALARI
+const ICON_PATHS = {
+  full: './img/svg/star.svg',
+  half: './img/svg/star-half.svg',
+  empty: './img/svg/star-outline.svg',
+};
+
+function getStarIcons(vote) {
+  const fullStars = Math.floor(vote / 2);
+  const halfStar = vote % 2 >= 1 ? 1 : 0;
+  const emptyStars = 5 - fullStars - halfStar;
+
+  return (
+    `<img class="star-icon full" src="${ICON_PATHS.full}" alt="star" />`.repeat(fullStars) +
+    `<img class="star-icon half" src="${ICON_PATHS.half}" alt="half star" />`.repeat(halfStar) +
+    `<img class="star-icon empty" src="${ICON_PATHS.empty}" alt="empty star" />`.repeat(emptyStars)
+  );
+}
+
 export async function createMoviePopup(movie) {
   // popup.html'den şablonu klonla
   let template = document.querySelector('#popup-template');
@@ -111,9 +130,23 @@ export async function createMoviePopup(movie) {
   await showPopupFromTemplate(popupOverlay, movie);
 }
 
+let lastScrollY = 0;
 
 async function showPopupFromTemplate(popupOverlay, movie) {
   popupOverlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  // Kapatma fonksiyonu (idempotent)
+  let isClosed = false;
+  function closePopup() {
+    if (isClosed) return;
+    isClosed = true;
+    // Önce popup'ı DOM'dan kaldır
+    if (popupOverlay.parentNode) popupOverlay.parentNode.removeChild(popupOverlay);
+    // Sonra body'nin stilini eski haline getir
+    document.body.style.overflow = '';
+  }
+
   // Görsel
   const img = popupOverlay.querySelector('.movie-popup-img');
   img.src = movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : '';
@@ -143,7 +176,6 @@ async function showPopupFromTemplate(popupOverlay, movie) {
   const addBtn = popupOverlay.querySelector('.movie-popup-add-btn');
   if (addBtn) {
     updateButtonState(movie, addBtn);
-
     addBtn.addEventListener('click', function() {
       toggleLibrary(movie, this);
     });
@@ -151,8 +183,8 @@ async function showPopupFromTemplate(popupOverlay, movie) {
 
   // Kapatma butonu
   const closeBtn = popupOverlay.querySelector('.movie-popup-close');
-
-  // Eğer butonun içinde img yoksa, dinamik olarak ekle
+  closeBtn.innerHTML = '';
+  // Her iki modda da img ile ekle
   let closeImg = closeBtn.querySelector('img');
   if (!closeImg) {
     closeImg = document.createElement('img');
@@ -166,45 +198,24 @@ async function showPopupFromTemplate(popupOverlay, movie) {
     closeBtn.appendChild(closeImg);
   }
 
-  // Repo adını dinamik olarak alalım, böylece hem lokalde hem canlıda çalışır
-  const isLocal = window.location.hostname === 'localhost';
-  const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
-  const basePath = isLocal ? '' : `/${repoName}`; // Canlıda "/CineScript-Team" gibi olacak
-
-  closeBtn.addEventListener('mouseenter', () => {
-    // Canlıda: /CineScript-Team/img/svg/close-hover.svg
-    // Lokal: /img/svg/close-hover.svg
-    closeBtn.querySelector('img').src = closeHoverSvg;
+  // Eski eventleri temizle, yeni event ekle
+  closeBtn.onclick = null;
+  closeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    closePopup();
   });
 
-  closeBtn.addEventListener('mouseleave', () => {
-    // Canlıda: /CineScript-Team/img/svg/close.svg
-    // Lokal: /img/svg/close.svg
-    closeBtn.querySelector('img').src = closeSvg;
-  });
-
-  closeBtn.addEventListener('click', () => popupOverlay.remove());
-
-  // Herhangi bir yere tıklanınca popup'ı kapat
-  popupOverlay.addEventListener('mousedown', function(e) {
+  // Overlay'e tıklayınca popup'ı kapat (event birikmesini önle)
+  popupOverlay.onclick = null;
+  popupOverlay.addEventListener('click', function(e) {
     if (e.target === popupOverlay) {
-      popupOverlay.remove();
+      closePopup();
     }
   });
-  // Ekrana ekle
-  document.body.appendChild(popupOverlay);
 
-  // Çarpı ikonunu DOM'a eklendikten sonra kesin olarak ekle
-  if (closeBtn) {
-    closeBtn.innerHTML = '';
-    const closeImg = document.createElement('img');
-    closeImg.alt = 'close';
-    closeImg.className = 'close-icon';
-    closeImg.width = 24;
-    closeImg.height = 24;
-    closeImg.style.width = '24px';
-    closeImg.style.height = '24px';
-    closeImg.src = closeSvg;
-    closeBtn.appendChild(closeImg);
-  }
+  // Ekrana eklemeden önce eski popup'ı kaldır
+  const oldPopup = document.querySelector('.movie-popup-overlay');
+  if (oldPopup) oldPopup.remove();
+  document.body.appendChild(popupOverlay);
 }
