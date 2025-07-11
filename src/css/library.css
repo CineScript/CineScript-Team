@@ -29,6 +29,7 @@
 .library-btn:hover {
   background: var(--white-color);
   color: var(--orange-color);
+  border: 1px solid var(--orange-color);
 }
 .search {
   background: var(--primary-linear-color);
@@ -39,6 +40,11 @@
   margin: 20px auto;
   width: 106px;
   height: 38px;
+}
+
+.load-more-btn:hover {
+  background: transparent;
+  border: 1px solid var(--orange-color);
 }
 
 .library-loading {
@@ -92,7 +98,7 @@
   border-radius: 7px;
 }
 
-/* Scrollbar’ı gizle (Chrome, Safari, Edge) */
+/* Scrollbarı gizle (Chrome, Safari, Edge) */
 .library-genre-options::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -262,9 +268,10 @@
   }
 
   .load-more-btn {
-    margin: 40px auto;
     width: 115px;
     height: 40px;
+    position: static;
+    margin-left: 350px;
   }
 
   .library-film-title {
@@ -315,6 +322,8 @@
   }
 
   .load-more-btn {
+    position: static;
+    margin-left: 573px;
     width: 134px;
     height: 52px;
   }
