@@ -148,15 +148,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }">
       </div>
       <div class="movie-details">
-        <h3>${movie.title || movie.original_title}</h3>
+        <h3 class="movie-title">${movie.title || movie.original_title}</h3>
         <div class="movie-details-info">
-         <p>Release date: <span class="release-date-text">${formattedDisplayDate}</span></p>
+         <p class="details-text">Release date: <span class="release-date-text">${formattedDisplayDate}</span></p>
 
-         <p>Vote / Votes: <span class ="vote-text">${voteAverage}</span> / <span class="vote-text">10</span></p>
-         <p>Popularity: ${popularity}</p>
-         <p>Genre: ${genreNames}</p>
+         <p class="details-text">Vote / Votes: <span class ="vote-text vote-text-container">${voteAverage}</span> / <span class="vote-text">10</span></p>
+         <p class="details-text">Popularity: <span class="details-text-info popularity-text">${popularity}</span></p>
+         <p class="details-text">Genre: <span class="details-text-info genre-text">${genreNames}</span></p>
         </div>
-        <p class="about-text">ABOUT ${overview}</p>
+        <div class="about-section"> <p class="about-label">ABOUT:</p> <p class="overview-text">${overview}</p> </div>
         <button class="add-to-library-btn" data-movie-id="${
           movie.id
         }">Add to my library</button>
