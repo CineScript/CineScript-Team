@@ -66,6 +66,10 @@
     margin: 195px 379px 215px 60px;
   }
 
+  .library-hero-title {
+    width: 350px;
+  }
+
   @media (min-resolution: 2dppx) {
     .library-hero-bg {
       background-image: url('../img/Hero-Library-Tablet@2x.jpg');
@@ -95,7 +99,12 @@
     margin: 169px 699px 249px 60px;
   }
 
+  .library-hero-title {
+    width: 500px;
+  }
+
   .library-hero-subtitle {
     font-size: 16px;
+    width: 500px;
   }
 }
