@@ -78,20 +78,33 @@
   padding: 12px 24px;
   border-radius: 30px;
   font-size: 16px;
-  border: none;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .catalog-hero-btn.trailer {
   background: linear-gradient(90deg, #f87501, #ff3c00);
-  color: #fff;
+  color: var(--black-color);
+}
+
+.catalog-hero-btn.trailer:hover {
+  background: transparent;
+  color: var(--orange-color);
+  border: 1px solid;
+  border-radius: 30px;
+  border-color: var(--orange-color);
+  border-image-slice: 1;
 }
 
 .catalog-hero-btn.details {
   background: transparent;
   border: 1px solid white;
-  color: #fff;
+  color: var(--white-color);
+  transition: all 0.3s ease;
+}
+
+.catalog-hero-btn.details:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 767px) {
