@@ -118,3 +118,37 @@
   transform: scale(1.1);
   transition: color 0.3s ease, transform 0.3s ease;
 }
+
+.avatar-icon img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.profile-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.profile-link {
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.profile-link.linkedin {
+  background-color: #0077b5;
+}
+
+.profile-link.github {
+  background-color: #ff6b08;
+}
+
+.profile-link:hover {
+  opacity: 0.9;
+}
