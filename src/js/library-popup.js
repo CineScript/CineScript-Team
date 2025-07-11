@@ -1,4 +1,13 @@
-import { fetchGenres } from "../api/tmdbApi.js";
+import { fetchGenres } from '../api/tmdbApi.js';
+
+// -----------------------------------------------------------------
+// Esc tuşuna basıldığında popup'ı kapatacak fonksiyon
+// -----------------------------------------------------------------
+const handleEscKeyPress = event => {
+  if (event.key === 'Escape') {
+    deleteMoviePopupClose();
+  }
+};
 
 // ------------------------------
 // 1. Popup'u gösterme fonksiyonu
@@ -11,12 +20,16 @@ export async function deleteMoviePopup(movie, genreMap) {
   if (!template) {
     const isLocal = window.location.hostname === 'localhost';
     const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
-    const popupPath = isLocal ? '/library-popup.html' : `/${repoName}/library-popup.html`;
+    const popupPath = isLocal
+      ? '/library-popup.html'
+      : `/${repoName}/library-popup.html`;
 
     try {
       const res = await fetch(popupPath);
       if (!res.ok) {
-        console.error(`Popup.html yüklenemedi. Durum: ${res.status}, URL: ${res.url}`);
+        console.error(
+          `Popup.html yüklenemedi. Durum: ${res.status}, URL: ${res.url}`
+        );
         return;
       }
 
@@ -25,7 +38,7 @@ export async function deleteMoviePopup(movie, genreMap) {
       tempDiv.innerHTML = html;
       const popupOverlay = tempDiv.querySelector('.movie-popup-overlay');
       if (!popupOverlay) {
-        console.error("movie-popup-overlay bulunamadı.");
+        console.error('movie-popup-overlay bulunamadı.');
         return;
       }
 
@@ -33,9 +46,8 @@ export async function deleteMoviePopup(movie, genreMap) {
       popupOverlay.id = 'popup-template';
       document.body.appendChild(popupOverlay);
       await showPopupFromTemplate(popupOverlay, movie, genreMap);
-
     } catch (error) {
-      console.error("Popup yüklenirken bir hata oluştu:", error);
+      console.error('Popup yüklenirken bir hata oluştu:', error);
     }
 
     return;
@@ -56,14 +68,19 @@ async function showPopupFromTemplate(popupOverlay, movie, genreMap) {
 
   // Poster ayarla
   const img = popupOverlay.querySelector('.movie-popup-img');
-  img.src = movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : '';
+  img.src = movie.poster_path
+    ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+    : '';
   img.alt = movie.title;
 
   // Film başlığı, oylar ve popülerlik
   popupOverlay.querySelector('.movie-popup-title').textContent = movie.title;
-  popupOverlay.querySelector('.vote-avg').textContent = movie.vote_average?.toFixed(1) ?? '-';
-  popupOverlay.querySelector('.vote-count').textContent = movie.vote_count ?? '-';
-  popupOverlay.querySelector('.popularity-value').textContent = movie.popularity?.toFixed(1) ?? '-';
+  popupOverlay.querySelector('.vote-avg').textContent =
+    movie.vote_average?.toFixed(1) ?? '-';
+  popupOverlay.querySelector('.vote-count').textContent =
+    movie.vote_count ?? '-';
+  popupOverlay.querySelector('.popularity-value').textContent =
+    movie.popularity?.toFixed(1) ?? '-';
 
   // Tür bilgisi oluşturma
   let genreText = '-';
@@ -76,8 +93,8 @@ async function showPopupFromTemplate(popupOverlay, movie, genreMap) {
   }
   popupOverlay.querySelector('.genre-value').textContent = genreText;
 
-  
-  popupOverlay.querySelector('.about-value').textContent = movie.overview || 'No description.';
+  popupOverlay.querySelector('.about-value').textContent =
+    movie.overview || 'No description.';
 
   // --------------------------
   // Remove butonuna işlev ekle
@@ -117,7 +134,7 @@ async function showPopupFromTemplate(popupOverlay, movie, genreMap) {
   closeBtn.addEventListener('click', () => deleteMoviePopupClose());
 
   // Popup arka planına tıklayınca kapat
-  popupOverlay.addEventListener('mousedown', (e) => {
+  popupOverlay.addEventListener('mousedown', e => {
     if (e.target === popupOverlay) {
       deleteMoviePopupClose();
     }
@@ -125,12 +142,21 @@ async function showPopupFromTemplate(popupOverlay, movie, genreMap) {
 
   // Popup'u DOM'a ekle
   document.body.appendChild(popupOverlay);
+
+  // Esc tuşunu dinlemek için olay dinleyiciyi ekle
+  document.addEventListener('keydown', handleEscKeyPress);
 }
 
 // -----------------------------
 // 3. Popup kapatma fonksiyonu
 // -----------------------------
 export function deleteMoviePopupClose() {
-  const popup = document.querySelector('.movie-popup-overlay') || document.querySelector('#popup-template');
-  if (popup) popup.remove();
+  const popup =
+    document.querySelector('.movie-popup-overlay') ||
+    document.querySelector('#popup-template');
+  if (popup) {
+    popup.remove();
+    //Popup kapatıldığında olay dinleyiciyi kaldır
+    document.removeEventListener('keydown', handleEscKeyPress);
+  }
 }

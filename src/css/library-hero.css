@@ -7,7 +7,7 @@
   background-position: 120%;
   background-color: black;
   width: 320px;
-  height: 380px;
+  height: 600px;
   position: relative;
 }
 
@@ -25,8 +25,8 @@
 .library-hero-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin: 40px 51px 144px 20px;
+  gap: 16px;
+  margin: 160px 20px 144px 36px;
 }
 
 @media (min-resolution: 2dppx) {
@@ -55,11 +55,15 @@
     background-position: 270% 110%;
 
     width: 768px;
-    height: 432px;
+    height: 600px;
+  }
+
+  .library-hero-subtitle {
+    width: 420px;
   }
 
   .library-hero-content {
-    margin: 62px 379px 118px 32px;
+    margin: 195px 379px 215px 60px;
   }
 
   @media (min-resolution: 2dppx) {
@@ -74,7 +78,7 @@
 @media only screen and (min-width: 1280px) {
   .library-hero-bg {
     width: 1280px;
-    height: 720px;
+    height: 600px;
     background-image: url('../img/Hero-Library-Desktop.jpg');
     background-size: 99% auto;
 
@@ -88,7 +92,7 @@
   }
 
   .library-hero-content {
-    margin: 169px 699px 249px 117px;
+    margin: 169px 699px 249px 60px;
   }
 
   .library-hero-subtitle {
