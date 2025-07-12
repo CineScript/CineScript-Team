@@ -365,6 +365,11 @@ html[data-theme='light'] .movie-popup .movie-popup-add-btn:hover {
   padding-left: 16px;
 }
 
+html[data-theme='light'] .year-label {
+  color: #282828;
+  font: 500 16px 'Roboto', sans-serif;
+}
+
 .movie-popup .close-icon {
   margin: 0;
   width: 24px;
