@@ -15,7 +15,7 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import {
   toggleLibraryButton,
   initializeLibraryButton,
-} from './libraryManager.js'; // ✅ Yeni eklendi
+} from './libraryManager.js'; //  Yeni eklendi
 
 const gallery = document.querySelector('.weekly-gallery');
 const seeAllBtn = document.querySelector('.weekly-see-all');
@@ -150,7 +150,7 @@ gallery.addEventListener('click', async e => {
           const closeBtn = instance.element().querySelector('.popup-close-btn');
           closeBtn.addEventListener('click', () => instance.close());
 
-          // ✅ Library butonu
+          // Library butonu
           const addBtn = instance.element().querySelector('.add-to-library');
           initializeLibraryButton(movie, addBtn);
           addBtn.addEventListener('click', () => {
@@ -161,6 +161,15 @@ gallery.addEventListener('click', async e => {
     );
 
     popup.show();
+
+    // ESC tuşuyla kapatma
+    function handleEscKey(e) {
+      if (e.key === 'Escape') {
+        popup.close();
+        window.removeEventListener('keydown', handleEscKey);
+      }
+    }
+    window.addEventListener('keydown', handleEscKey);
   } catch (err) {
     console.error('Popup açılırken hata:', err);
   }
