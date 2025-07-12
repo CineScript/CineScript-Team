@@ -1,18 +1,39 @@
 <section class="catalog" id="catalog">
   <section class="search-section">
-    <form id="search-form" class="search-form">
+    <form id="search-form" class="search-form" autocomplete="off">
       <input
         type="text"
         placeholder="Search"
         name="query"
         id="search-input"
         class="search-input"
+        autocomplete="off"
       />
-      <select id="year-select" class="year-select">
-        <option value="">Year</option>
-      </select>
-
-      <button class="search-button" aria-label="Search">
+      <div class="year-dropdown">
+        <div class="year-selected">
+          <span class="year-label">Year</span>
+          <span class="year-arrow">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.9375 5.46875L8 10.5312L13.0625 5.46875"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </div>
+        <ul class="year-options hidden">
+          <!-- JS ile li'ler eklenecek -->
+        </ul>
+      </div>
+      <button type="submit" class="search-button" aria-label="Search">
         <img
           src="./img/svg/search-w.svg"
           alt="Search Icon"
@@ -23,15 +44,18 @@
     </form>
   </section>
 
+  <p id="no-results" class="no-results-message" style="display: none">
+    <span>OOPS...</span><br />
+    <span>We are very sorry!</span><br />
+    <span>We don’t have any results matching your search.</span>
+  </p>
+
   <!-- Film Listesi -->
-  <section class="movie-list-section">
+    <div class="movie-catalog-container">
     <ul id="movie-list" class="movie-list">
       <!-- JS ile film kartları gelecek -->
     </ul>
-    <p id="no-results" class="no-results-message" style="display: none">
-      Aradığınız kriterlere uygun film bulunamadı.
-    </p>
-  </section>
+  </div>
 
   <!-- Sayfalama (şimdilik boş) -->
   <section class="pagination-section" id="pagination"></section>
