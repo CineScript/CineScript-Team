@@ -57,7 +57,7 @@ export function initHeader() {
 
   function updateIcon(theme) {
     const iconPath =
-      theme === 'dark' ? './img/svg/dark.svg' : './img/svg/light.svg';
+      theme === 'dark' ? '../public/svg/dark.svg' : '../public/svg/light.svg';
     themeIcon.setAttribute('src', iconPath);
   }
 }

@@ -5,7 +5,6 @@ export async function deleteHeroTrendsPopup(movie, genreMap) {
   let template = document.querySelector('#hero-trends-popup-template');
 
   if (!template) {
-    // Sadece popup.html fetch edilecek, Vite'de public klasörü root'tan erişilir
     const popupPath = './public/popup.html';
 
     try {
@@ -21,7 +20,6 @@ export async function deleteHeroTrendsPopup(movie, genreMap) {
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = html;
 
-      // popup.html içindeki .movie-popup-overlay class'ını kullandığın için
       const popupOverlay = tempDiv.querySelector('.movie-popup-overlay');
       if (!popupOverlay) {
         console.error('.movie-popup-overlay bulunamadı.');
@@ -43,11 +41,18 @@ export async function deleteHeroTrendsPopup(movie, genreMap) {
   await showHeroTrendsPopupFromTemplate(popupOverlay, movie, genreMap);
 }
 
-// --------------------------------------------
 // 2. Popup içeriğini doldurma ve event ekleme
-// --------------------------------------------
 async function showHeroTrendsPopupFromTemplate(popupOverlay, movie, genreMap) {
   popupOverlay.style.display = 'flex';
+
+  // ESC tuşuyla kapatma
+  function handleEscKey(event) {
+    if (event.key === 'Escape') {
+      deleteHeroTrendsPopupClose();
+      document.removeEventListener('keydown', handleEscKey);
+    }
+  }
+  document.addEventListener('keydown', handleEscKey);
 
   const img = popupOverlay.querySelector('.movie-popup-img');
   img.src = movie.poster_path
@@ -103,20 +108,22 @@ async function showHeroTrendsPopupFromTemplate(popupOverlay, movie, genreMap) {
     closeBtn.querySelector('img').src = `${basePath}/img/svg/close.svg`;
   });
 
-  closeBtn.addEventListener('click', () => deleteHeroTrendsPopupClose());
+  closeBtn.addEventListener('click', () => {
+    deleteHeroTrendsPopupClose();
+    document.removeEventListener('keydown', handleEscKey);
+  });
 
   popupOverlay.addEventListener('mousedown', e => {
     if (e.target === popupOverlay) {
       deleteHeroTrendsPopupClose();
+      document.removeEventListener('keydown', handleEscKey);
     }
   });
 
   document.body.appendChild(popupOverlay);
 }
 
-// -----------------------------
 // 3. Popup kapatma fonksiyonu
-// -----------------------------
 export function deleteHeroTrendsPopupClose() {
   const popup =
     document.querySelector('.movie-popup-overlay') ||

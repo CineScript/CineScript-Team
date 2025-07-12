@@ -4,7 +4,7 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import {
   toggleLibraryButton,
   initializeLibraryButton,
-} from './libraryManager.js'; // ✅ Kütüphane işlemleri
+} from './libraryManager.js'; // Kütüphane işlemleri
 
 import {
   fetchPopularMovies,
@@ -165,7 +165,7 @@ export async function showHeroBasedOnAPI() {
                     .querySelector('.popup-close-btn');
                   closeBtn.addEventListener('click', () => instance.close());
 
-                  // ✅ Buton aktifliği kontrolü ve toggle işlemi
+                  //  Buton aktifliği kontrolü ve toggle işlemi
                   const addBtn = instance
                     .element()
                     .querySelector('.add-to-library');
@@ -178,6 +178,15 @@ export async function showHeroBasedOnAPI() {
             );
 
             popup.show();
+
+            // ESC tuşuyla kapatma
+            function handleEscKey(e) {
+              if (e.key === 'Escape') {
+                popup.close();
+                window.removeEventListener('keydown', handleEscKey);
+              }
+            }
+            window.addEventListener('keydown', handleEscKey);
           } catch (error) {
             console.error('Detay popup gösterilemedi:', error);
           }
