@@ -82,7 +82,6 @@ body {
   min-height: 100vh;
   margin: 0;
   width: 320px;
-  height: 2014px;
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   line-height: auto;
@@ -198,7 +197,6 @@ h3 {
 @media only screen and (min-width: 768px) {
   body {
     width: 768px;
-    height: 1847px;
     font-size: 14px;
   }
 
@@ -258,7 +256,6 @@ h3 {
 @media only screen and (min-width: 1280px) {
   body {
     width: 1280px;
-    height: 2213px;
     font-size: 16px;
   }
 
