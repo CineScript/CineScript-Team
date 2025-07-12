@@ -56,8 +56,7 @@ export function initHeader() {
   });
 
   function updateIcon(theme) {
-    const iconPath =
-      theme === 'dark' ? '../public/svg/dark.svg' : '../public/svg/light.svg';
+    const iconPath = theme === 'dark' ? '/svg/dark.svg' : '/svg/light.svg';
     themeIcon.setAttribute('src', iconPath);
   }
 }
