@@ -22,6 +22,7 @@ const totalApiPages = Math.ceil(TOTAL_MOVIES / TMDB_PAGE_SIZE);
 let allMovies = [];
 let currentPage = 1;
 let totalPages = Math.ceil(TOTAL_MOVIES / MOVIES_PER_PAGE);
+let currentSearchResults = null;
 
 // Pagination container
 let paginationContainer = document.createElement('div');
@@ -77,13 +78,14 @@ function renderPagination(page, totalPages) {
 function changePage(newPage) {
   if (newPage < 1 || newPage > totalPages) return;
   currentPage = newPage;
-  renderMovies(getMoviesForPage(currentPage));
+  const movieArray = currentSearchResults || allMovies;
+  renderMovies(getMoviesForPage(currentPage, movieArray));
   renderPagination(currentPage, totalPages);
 }
 
-function getMoviesForPage(page) {
+function getMoviesForPage(page, movieArray = allMovies) {
   const start = (page - 1) * MOVIES_PER_PAGE;
-  return allMovies.slice(start, start + MOVIES_PER_PAGE);
+  return movieArray.slice(start, start + MOVIES_PER_PAGE);
 }
 
 // YILDIZLAR İÇİN SVG'Yİ JS İLE OLUŞTUR
@@ -152,9 +154,11 @@ function renderMovies(movies) {
   movieList.innerHTML = '';
   if (!movies || movies.length === 0) {
     noResults.style.display = 'block';
+    paginationContainer.style.display = 'none';
     return;
   }
   noResults.style.display = 'none';
+  paginationContainer.style.display = '';
   // Genre map'i hazırla
   if (!window._genreMap) window._genreMap = null;
   const genreMap = window._genreMap;
@@ -309,7 +313,11 @@ export async function initCatalog() {
           );
         }
 
-        renderMovies(filteredResults);
+        currentSearchResults = filteredResults;
+        totalPages = Math.ceil(filteredResults.length / MOVIES_PER_PAGE);
+        currentPage = 1;
+        renderMovies(getMoviesForPage(currentPage, currentSearchResults));
+        renderPagination(currentPage, totalPages);
         yearDropdown.style.display = 'inline-block'; // Sadece arama sonrası göster
         form.classList.add('active'); // Sadece arama sonrası üçlü blok ortala
 
