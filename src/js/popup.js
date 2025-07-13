@@ -113,20 +113,23 @@ async function showCatalogPopupFromTemplate(popupSection, movie, genreMap) {
     }
   }
 
-  const closeBtn = popupOverlay.querySelector('.movie-popup-close');
-  const isLocal = window.location.hostname === 'localhost';
-  const repoName = isLocal ? '' : window.location.pathname.split('/')[1];
-  const basePath = isLocal ? '' : `/${repoName}`;
+const closeBtn = popupOverlay.querySelector('.movie-popup-close');
 
-  closeBtn.addEventListener('mouseenter', () => {
-    closeBtn.querySelector('img').src = `${basePath}/img/svg/close-hover.svg`;
-  });
+// Mouse ile üzerine gelince 'hovered' class'ı ekle
+closeBtn.addEventListener('mouseenter', () => {
+  const icon = closeBtn.querySelector('.close-icon');
+  if (icon) icon.classList.add('hovered');
+});
 
-  closeBtn.addEventListener('mouseleave', () => {
-    closeBtn.querySelector('img').src = `${basePath}/img/svg/close.svg`;
-  });
+// Mouse çıkınca 'hovered' class'ı kaldır
+closeBtn.addEventListener('mouseleave', () => {
+  const icon = closeBtn.querySelector('.close-icon');
+  if (icon) icon.classList.remove('hovered');
+});
 
-  closeBtn.addEventListener('click', () => closeCatalogPopup());
+// Kapatma
+closeBtn.addEventListener('click', () => closeCatalogPopup());
+
 
   popupOverlay.addEventListener('mousedown', e => {
     if (e.target === popupOverlay) {

@@ -706,7 +706,7 @@ html[data-theme='light'] .no-results-message {
 .movie-popup .votes-values,
 .movie-popup-popularity .popularity-value,
 .movie-popup-genre .genre-value {
-  margin-left: 32px;
+  margin-left: 10px;
 }
 
 .movie-catalog-bottom-row {
