@@ -73,7 +73,7 @@ trailerBtn.addEventListener('click', handleTrailerClick);
 
 detailsBtn.addEventListener('click', () => {
   if (currentMovieData) {
-    createMoviePopup(currentMovieData);
+    createMoviePopup(currentMovieData, {});
   }
 });
 
