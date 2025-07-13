@@ -28,18 +28,7 @@ let currentSearchResults = null;
 let paginationContainer = document.createElement('div');
 paginationContainer.className = 'pagination-container';
 
-function enableMoviePopups() {
-  movieList.addEventListener('click', e => {
-    const li = e.target.closest('li.movie-item');
-    if (!li) return;
-    const idx = Array.from(movieList.children).indexOf(li);
-    const movies = Array.from(movieList.children)
-      .map(li => li._movieData)
-      .filter(Boolean);
-    const movie = movies[idx];
-    if (movie) createMoviePopup(movie);
-  });
-}
+// enableMoviePopups fonksiyonu kaldırıldı çünkü createMovieCard içinde zaten tıklama olayı var
 
 function renderPagination(page, totalPages) {
   paginationContainer.innerHTML = '';
@@ -142,7 +131,7 @@ function createMovieCard(movie, genreMap) {
   // Popup açmak için tıklama
   li.addEventListener('click', () => {
     if (typeof createMoviePopup === 'function') {
-      createMoviePopup(movie);
+      createMoviePopup(movie, genreMap);
     }
   });
 
@@ -259,7 +248,6 @@ function addSearchClearButton() {
 // Otomatik başlat
 document.addEventListener('DOMContentLoaded', () => {
   initCatalog();
-  enableMoviePopups();
   addSearchClearButton();
 });
 
