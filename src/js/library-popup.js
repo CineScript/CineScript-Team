@@ -124,11 +124,13 @@ async function showPopupFromTemplate(popupOverlay, movie, genreMap) {
   const basePath = isLocal ? '' : `/${repoName}`;
 
   closeBtn.addEventListener('mouseenter', () => {
-    closeBtn.querySelector('img').src = `${basePath}/img/svg/close-hover.svg`;
+    const icon = closeBtn.querySelector('.close-icon');
+    if (icon) icon.classList.add('hovered');
   });
 
   closeBtn.addEventListener('mouseleave', () => {
-    closeBtn.querySelector('img').src = `${basePath}/img/svg/close.svg`;
+    const icon = closeBtn.querySelector('.close-icon');
+    if (icon) icon.classList.remove('hovered');
   });
 
   closeBtn.addEventListener('click', () => deleteMoviePopupClose());
