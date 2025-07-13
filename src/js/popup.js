@@ -5,7 +5,7 @@ export async function createMoviePopup(movie, genreMap) {
   let template = document.querySelector('#catalog-popup-template');
 
   if (!template) {
-    const popupPath = './public/popup.html';
+    const popupPath = './popup.html';
 
     try {
       const res = await fetch(popupPath);
