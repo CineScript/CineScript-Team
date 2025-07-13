@@ -15,5 +15,4 @@ async function loadPartials() {
     }
   }
 }
-loadPartials().then(() => {
-});
+loadPartials().then(() => {});
