@@ -1,8 +1,17 @@
 <section class="movie-popup-section" id="movie-popup-section" style="display:none;">
   <div class="movie-popup-overlay">
     <div class="movie-popup">
-      <button class="movie-popup-close" aria-label="Close">
-        <img src="../img/svg/close.svg" alt="close" class="close-icon" width="24" height="24" style="width:24px;height:24px;" />
+     <button class="movie-popup-close" aria-label="Close">
+        <svg
+          class="close-icon"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" />
+          <path d="M6 18L18 6" stroke="currentColor" stroke-width="2" />
+        </svg>
       </button>
       <img class="movie-popup-img" src="" alt="Movie Poster" />
       <div class="movie-popup-info">
@@ -19,7 +28,7 @@
         <div class="movie-popup-genre"><b>Genre</b> <span class="genre-value">Genre</span></div>
         <div class="movie-popup-about"><b>About</b> <p class="about-value">No description.</p></div>
         <div class="gradient-border">
-  <button class="btn-primary movie-popup-add-btn removed">Remove from my library</button>
+  <button class="movie-popup-add-btn removed">Remove from my library</button>
 </div>
 
       </div>
