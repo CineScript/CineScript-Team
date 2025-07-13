@@ -113,23 +113,22 @@ async function showCatalogPopupFromTemplate(popupSection, movie, genreMap) {
     }
   }
 
-const closeBtn = popupOverlay.querySelector('.movie-popup-close');
+  const closeBtn = popupOverlay.querySelector('.movie-popup-close');
 
-// Mouse ile üzerine gelince 'hovered' class'ı ekle
-closeBtn.addEventListener('mouseenter', () => {
-  const icon = closeBtn.querySelector('.close-icon');
-  if (icon) icon.classList.add('hovered');
-});
+  // Mouse ile üzerine gelince 'hovered' class'ı ekle
+  closeBtn.addEventListener('mouseenter', () => {
+    const icon = closeBtn.querySelector('.close-icon');
+    if (icon) icon.classList.add('hovered');
+  });
 
-// Mouse çıkınca 'hovered' class'ı kaldır
-closeBtn.addEventListener('mouseleave', () => {
-  const icon = closeBtn.querySelector('.close-icon');
-  if (icon) icon.classList.remove('hovered');
-});
+  // Mouse çıkınca 'hovered' class'ı kaldır
+  closeBtn.addEventListener('mouseleave', () => {
+    const icon = closeBtn.querySelector('.close-icon');
+    if (icon) icon.classList.remove('hovered');
+  });
 
-// Kapatma
-closeBtn.addEventListener('click', () => closeCatalogPopup());
-
+  // Kapatma
+  closeBtn.addEventListener('click', () => closeCatalogPopup());
 
   popupOverlay.addEventListener('mousedown', e => {
     if (e.target === popupOverlay) {
@@ -146,7 +145,6 @@ closeBtn.addEventListener('click', () => closeCatalogPopup());
 
   document.body.appendChild(popupSection);
 }
-
 
 // -----------------------------
 // 3. Popup kapatma fonksiyonu
