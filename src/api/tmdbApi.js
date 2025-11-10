@@ -1,4 +1,4 @@
-const API_KEY = "2609725f661288e9b08bc0d62455b671";
+const API_KEY = "10a2b34d42f60dfb2d09dce193d2c592";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 // Tüm filmler
@@ -50,4 +50,3 @@ export async function fetchGenres() {
   const res = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
   return await res.json();
 }
-
